@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
+    <style media="screen">
+        body { display: flex; min-height: 100vh; flex-direction: column; }
+        main { flex: 1 0 auto; }
+    </style>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -38,9 +42,10 @@
                 </a>
 
                 <ul class="hide-on-med-and-down">
-                  <li><a href="#">Home</a></li>
-                  <li class="active"><a href="#">Peserta</a></li>
-                  <li><a href="#">Kontak</a></li>
+                  <li class="active"><a href="/">Home</a></li>
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="/info_ppdb">Info PPDB</a></li>
+                  <li><a href="/list_peserta">Peserta</a></li>
                   <li><a href="#" class="dropdown-button" data-activates="menuDropdown">Help <i class="material-icons right">keyboard_arrow_down</i></a></li>
                   @if (Auth::guest())
                     <li class="right"><a href="/login">Login</a></li>
@@ -70,9 +75,9 @@
                 </ul>
 
                 <ul class="side-nav" id="mobile-menu">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Peserta</a></li>
-                  <li><a href="#">Kontak</a></li>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/info_ppdb">Info PPDB</a></li>
+                  <li><a href="/list_peserta">Peserta</a></li>
                   <li><a href="#" class="dropdown-button" data-activates="menuDropdown2">Help <i class="material-icons right">keyboard_arrow_down</i></a></li>
                   @if (Auth::guest())
                     <li><a href="/login">Login</a></li>
@@ -84,9 +89,12 @@
           </nav>
       <!-- </div> -->
       <br><br>
-      <div class="container">
-          @yield('konten')
-      </div>
+      <main>
+        <div class="container">
+            @yield('konten')
+        </div>
+      </main>
+
 
       <footer class="page-footer indigo darken-3 white-text">
         <div class="container">

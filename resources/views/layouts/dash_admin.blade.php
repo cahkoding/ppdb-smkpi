@@ -8,6 +8,9 @@
     <link type="text/css" rel="stylesheet" href="/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <style media="screen">
+    ul.side-nav.fixed ul.collapsible-accordion a.collapsible-header {padding: 0 30px;}
+    </style>
     <script type="text/javascript">
      $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
@@ -63,10 +66,28 @@
                           </div>
                       </li>
                       <li><div class="divider"></div></li>
-                      <li><a href="/peserta"><i class="material-icons">perm_identity</i>Peserta</a></li>
-                      <li><a href="/info"><i class="material-icons">info</i>Informasi</a></li>
-                      <li><a href="/laporan"><i class="material-icons">book</i>Laporan</a></li>
-                      <li><a href="/pesan_admin"><i class="material-icons">email</i>Pesan</a></li>
+
+                      {{-- Menu Navigasi --}}
+                      <li><a class="waves-effect waves-teal" href="/admin">
+                        <i class="material-icons">home</i>Home</a>
+                      </li>
+                      <li class="no-padding">
+                        <ul class="collapsible collapsible-accordion">
+                          <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">school</i>Sekolah</a>
+                            <div class="collapsible-body">
+                              <ul>
+                                <li><a href="color.html">Tentang Sekolah</a></li>
+                                <li><a href="grid.html">Visi & Misi</a></li>
+                                <li><a href="helpers.html">Lokasi</a></li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="waves-effect waves-teal" href="/peserta"><i class="material-icons">perm_identity</i>Peserta</a></li>
+                      <li><a class="waves-effect waves-teal" href="/info"><i class="material-icons">info</i>Informasi</a></li>
+                      <li><a class="waves-effect waves-teal" href="/laporan"><i class="material-icons">book</i>Laporan</a></li>
+                      <li><a class="waves-effect waves-teal" href="/pesan_admin"><i class="material-icons">email</i>Pesan</a></li>
                 </ul>
             </div>
         <!-- end side nav -->

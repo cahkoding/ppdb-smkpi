@@ -5,6 +5,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/list_peserta', 'PublicController@list_peserta');\
+Route::get('/profile', 'PublicController@profile');
+Route::get('/info_ppdb', 'PublicController@info_ppdb');
+Route::get('/info_ppdb/{id}', 'PublicController@info_detail');
+
 Route::group(['middleware'=>'admin'], function(){
     Route::get('/admin', 'adminController@index');
     Route::get('/peserta', 'adminController@peserta');
