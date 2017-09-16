@@ -76,6 +76,7 @@
 
                 <ul class="side-nav" id="mobile-menu">
                   <li><a href="/">Home</a></li>
+                  <li><a href="/profile">Profile</a></li>
                   <li><a href="/info_ppdb">Info PPDB</a></li>
                   <li><a href="/list_peserta">Peserta</a></li>
                   <li><a href="#" class="dropdown-button" data-activates="menuDropdown2">Help <i class="material-icons right">keyboard_arrow_down</i></a></li>

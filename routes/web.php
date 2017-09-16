@@ -46,4 +46,11 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('get-updates','TelegramController@getUpdates');
     Route::get('send','TelegramController@getSendMessage');
     Route::post('send','TelegramController@postSendMessage');
+
+    Route::get('/tentang_sekolah', 'SekolahController@tentang_sekolah');
+    Route::post('/tentang_sekolah', 'SekolahController@tentang_sekolah_store');
+    Route::get('/visi_misi', 'SekolahController@visi_misi');
+    Route::post('/visi_misi', 'SekolahController@visi_misi_store');
+    Route::get('/lokasi', 'SekolahController@lokasi');
+    Route::post('/lokasi', 'SekolahController@lokasi_store');
 });

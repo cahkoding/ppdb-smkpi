@@ -27,7 +27,7 @@ class LoginController extends Controller
      */
 
 
-    private $redirectTo = '/dashboard';
+    private $redirectTo = '/login';
 
 
     /**

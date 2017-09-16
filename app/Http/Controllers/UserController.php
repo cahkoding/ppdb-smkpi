@@ -47,7 +47,7 @@ class UserController extends Controller
             'nisn' => $request->nisn,
             'nama' => $request->nama,
             'asal_sekolah' => $request->asal,
-            'no_peserta_un'=> $request->no_un,
+            // 'no_peserta_un'=> $request->no_un,
             'tahun_id'=> $request->tahun,
             'berat_badan' => $request->berat,
             'tinggi_badan'=> $request->tinggi,

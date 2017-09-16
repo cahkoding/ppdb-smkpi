@@ -76,9 +76,9 @@
                           <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">school</i>Sekolah</a>
                             <div class="collapsible-body">
                               <ul>
-                                <li><a href="color.html">Tentang Sekolah</a></li>
-                                <li><a href="grid.html">Visi & Misi</a></li>
-                                <li><a href="helpers.html">Lokasi</a></li>
+                                <li><a href="/tentang_sekolah">Tentang Sekolah</a></li>
+                                <li><a href="/visi_misi">Visi & Misi</a></li>
+                                <li><a href="/lokasi">Lokasi</a></li>
                               </ul>
                             </div>
                           </li>
