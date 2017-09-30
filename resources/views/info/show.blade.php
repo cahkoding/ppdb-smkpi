@@ -56,9 +56,40 @@
                 </div>
 
                 <div class="row">
+                  @if ($info->gambar!=null)
+                    <img src="{{asset('storage/foto/'.$info->gambar)}}" alt="">
+                  @endif
+                </div>
+                <div class="row">
+                  <p class="right-align">LAMPIRAN: <a href="{{asset('storage/lampiran/'.$info->lampiran)}}"><i class="material-icons">insert_drive_file</i>  {{$info->lampiran}}</a></p>
+                </div>
+                </div>
+
+                <div class="row">
                   <div class="file-field input-field col s7">
                     <div class="btn">
-                      <span>Upload</span>
+                      @if ($info->gambar!=null)
+                        <span>Upload ulang gambar</span>
+                      @else
+                        <span>Upload Gambar</span>
+                      @endif
+                      <input  type="file" name="gambar">
+                      <input  type="hidden" name="tmp_gambar" value="{{$info->gambar}}">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate"  type="text" placeholder="lampiran pdf/rar jika lebih dari satu">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="file-field input-field col s7">
+                    <div class="btn">
+                      @if ($info->lampiran!=null)
+                        <span>Upload ulang lampiran</span>
+                      @else
+                        <span>Upload Lampiran</span>
+                      @endif
                       <input  type="file" name="lampiran">
                       <input  type="hidden" name="tmp_lampiran" value="{{$info->lampiran}}">
                     </div>

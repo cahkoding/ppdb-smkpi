@@ -16,10 +16,10 @@
       <table class="striped responsive-table">
          <thead>
            <tr>
-               <th>ID Info</th>
+               {{-- <th>ID Info</th> --}}
                <th>Title</th>
                <th>Cretaed at</th>
-               <th>Updated at</th>
+               {{-- <th>Updated at</th> --}}
                <th>Tools</th>
            </tr>
          </thead>
@@ -27,19 +27,19 @@
          <tbody>
            @foreach ($info as $infos)
              <tr>
-               <td>{{$infos->id}}</td>
+               {{-- <td>{{$infos->id}}</td> --}}
                <td>{{$infos->title}}</td>
                <td>{{$infos->created_at}}</td>
-               <td>{{$infos->updated_at}}</td>
+               {{-- <td>{{$infos->updated_at}}</td> --}}
                <td>
-                 <a href="info/{{$infos->id}}"><i class="material-icons black-text">mode_edit</i></a><br>
-                 {{ Form::open(array('url' => 'info/'.$infos->id, 'method' => 'delete', 'onsubmit' => 'return confirm("Yakin ingin menghapus?")')) }}
+                 <a href="info/{{$infos->id}}"><i class="material-icons black-text">mode_edit</i></a>
+                 {{-- {{ Form::open(array('url' => 'info/'.$infos->id, 'method' => 'delete', 'onsubmit' => 'return confirm("Yakin ingin menghapus?")')) }}
                  {{ csrf_field() }}
                  <button style="padding:0;border:none;background:none;" type="submit"><i class="material-icons black-text">delete_forever</i></button>
-                 {{ Form::close() }}
-                 {{-- <a href="info/hapus/{{$infos->id}}" onclick="return confirm('hapus info {{$infos->title}}?')">
+                 {{ Form::close() }} --}}
+                 <a href="/hapusinfo/{{$infos->id}}" onclick="return confirm('hapus info {{$infos->title}}?')">
                    <i class="material-icons black-text">delete_forever</i>
-                 </a> --}}
+                 </a>
                  <a href="cetakInfo/{{$infos->id}}"><i class="material-icons black-text">print</i></a>
                </td>
              </tr>

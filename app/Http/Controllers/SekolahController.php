@@ -47,4 +47,19 @@ class SekolahController extends Controller
       Sekolah::Where('id', 3)->update(['teks'=>$request->teks]);
       return redirect('/lokasi')->with('message','Data Berhasil disimpan!');
   }
+
+
+  public function pengaturan_ppdb()
+  {
+    $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+    return view('pengaturan.pengaturan_ppdb', compact('profile'));
+  }
+
+  public function pengaturan_telegramBot()
+  {
+    $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+    return view('pengaturan.pengaturan_telegrambot', compact('profile'));
+  }
+
+
 }

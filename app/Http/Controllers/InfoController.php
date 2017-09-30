@@ -34,12 +34,18 @@ class InfoController extends Controller
             $filename = time().'_'.$request->file('lampiran')->getClientOriginalName();
             $request->file('lampiran')->storeAs('public/lampiran', $filename);
         }
+        $gambar=null;
+        if ($request->file('gambar')!=null) {
+            $gambar = time().'_'.$request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->storeAs('public/foto', $gambar);
+        }
 
         Info::create([
             'author' => Auth::user()->id,
             'title' => $request->title,
             'text' => $request->isi_info,
             'lampiran' => $filename,
+            'gambar' => $gambar,
         ]);
 
         return redirect('/info')->with('message', 'Berhasil menambahkan info!');
@@ -61,6 +67,7 @@ class InfoController extends Controller
 
     public function update(Request $request, $id)
     {
+        //validasi lampiran
         if ($request->file('lampiran')!=null) {
             if($request->tmp_lampiran!=null){
                 Storage::delete('public/lampiran/'.$request->tmp_lampiran);
@@ -70,13 +77,25 @@ class InfoController extends Controller
         }else{
             $filename = ($request->tmp_lampiran!=null) ? $request->tmp_lampiran : null;
         }
+        //validasi gambar
+        if ($request->file('gambar')!=null) {
+            if($request->tmp_gambar!=null){
+                Storage::delete('public/foto/'.$request->tmp_gambar);
+            }
+            $gambar = time().'_'.$request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->storeAs('public/foto', $gambar);
+        }else{
+            $gambar   = ($request->tmp_gambar!=null) ? $request->tmp_gambar : null;
+        }
 
         Info::find($id)->update([
             'title'=> $request->title,
             'text' => $request->isi_info,
             'lampiran' => $filename,
+            'gambar' => $gambar,
         ]);
 
         return redirect('info/'.$id)->with('message', 'Info berhasil disimpan!');
     }
+
 }

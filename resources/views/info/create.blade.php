@@ -57,7 +57,19 @@
                 <div class="row">
                   <div class="file-field input-field col s7">
                     <div class="btn">
-                      <span>Upload</span>
+                      <span>Upload Gambar</span>
+                      <input  type="file" name="gambar">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate"  type="text" placeholder="gambat jpg/png">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="file-field input-field col s7">
+                    <div class="btn">
+                      <span>Upload Lampiran</span>
                       <input  type="file" name="lampiran">
                     </div>
                     <div class="file-path-wrapper">

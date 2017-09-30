@@ -25,7 +25,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Helpers/MyLib.php" 
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -52,4 +55,5 @@
         "preferred-install": "dist",
         "sort-packages": true
     }
+
 }

@@ -14,6 +14,8 @@ use App\Models\Profile;
 use App\Models\Tahun;
 use App\Models\Pekerjaan;
 use PDF;
+use MyLib;
+
 
 
 class UserController extends Controller
@@ -21,12 +23,11 @@ class UserController extends Controller
 
     public function biodata()
     {
-        $id=Auth::user()->id;
-        $profile = Profile::Where('user_id',$id)->get()->first();
-        $nilai   = Nilai::Where('user_id',$id)->get()->first();
+        MyLib::getProfile();
+        $nilai   = Nilai::Where('user_id',MyLib::getUser())->get()->first();
         $tahun   = Tahun::all();
         $pekerjaan = Pekerjaan::all();
-        return view('peserta.biodata', compact('profile','tahun','pekerjaan','nilai'));
+        return view('peserta.biodata', compact('tahun','pekerjaan','nilai'), ['profile'=>MyLib::getProfile()]);
     }
 
     public function simpan(Request $request)

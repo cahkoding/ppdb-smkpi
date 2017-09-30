@@ -240,6 +240,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'MyLib' => App\Helpers\MyLib::class,
     ],
 
 ];

@@ -107,7 +107,7 @@ $(document).ready(function(){
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
       startingTop: '4%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
+      endingTop: '26%', // 10% Ending top style attribute
       // ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
       //   alert("Ready");
       //   console.log(modal, trigger);

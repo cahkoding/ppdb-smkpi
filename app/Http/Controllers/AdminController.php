@@ -97,10 +97,11 @@ class AdminController extends Controller
 
     public function pesan()
     {
-      $profile   = Profile::Where('user_id',Auth::user()->id)->get()->first();
+      $users     = User::Where('role','<>',2)->get();
+      $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
       $pesan     = Pesan::Where('pengirim', 'peserta')->orderBy('created_at', 'desc')->paginate(8);
       $terkirim  = Pesan::Where('pengirim', 'admin')->orderBy('created_at', 'desc')->paginate(8);
-      return view('admin.pesan', compact('profile', 'pesan', 'terkirim'));
+      return view('admin.pesan', compact('users', 'profile', 'pesan', 'terkirim'));
     }
 
     public function pesan_detail($id)
@@ -108,6 +109,26 @@ class AdminController extends Controller
       $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
       $pesan  = Pesan::Where('id_pesan', $id)->get()->first();
       return view('admin.pesan_detail', compact('profile', 'pesan'));
+    }
+
+    public function send(Request $request)
+    {
+      $filename=null;
+      if ($request->file('lampiran')!=null) {
+          $filename = time().'_'.$request->file('lampiran')->getClientOriginalName();
+          $request->file('lampiran')->storeAs('public/lampiran', $filename);
+      }
+
+      Pesan::create([
+          'id_peserta' => $request->userid,
+          'id_admin' => Auth::User()->id,
+          'subjek' => $request->subject,
+          'pesan_teks' => $request->pesan,
+          'lampiran' => $filename,
+          'pengirim' => 'admin',
+      ]);
+
+      return redirect('/pesan_admin')->with('message', 'Pesan berhasil dikirim!');
     }
 
     public function reply(Request $request, $id)
@@ -131,4 +152,11 @@ class AdminController extends Controller
       return redirect('/pesan_admin')->with('message', 'berhasil membalas pesan!');
     }
 
+    public function cetakLap()
+    {
+        $users = User::Where('role','<>',2)->get();
+        $pdf=PDF::loadView('pdf.calonsiswa_terdaftar', compact('users'));
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('calonsiswa_terdaftar.pdf');
+    }
 }

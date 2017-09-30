@@ -12,6 +12,8 @@
     <style media="screen">
         body { display: flex; min-height: 100vh; flex-direction: column; }
         main { flex: 1 0 auto; }
+        .tabs .indicator {background-color: white;}
+}
     </style>
     <script>
         window.Laravel = {!! json_encode([
@@ -23,18 +25,27 @@
   <body>
 
       <!-- <div class="navbar-fixed"> -->
-
+      {{-- buat dropdown pc --}}
       <ul id="menuDropdown" class="dropdown-content">
-        <li> <a href="#">F.A.Q</a></li>
-        <li> <a href="#">Hubungi</a></li>
+        <li> <a href="/faq">F.A.Q</a></li>
+        <li> <a href="/pesan">Buat Pesan</a></li>
       </ul>
+      <ul id="dropdownPPDB" class="dropdown-content">
+        <li><a href="/list_peserta">Peserta</a></li>
+        <li><a href="/info_ppdb">Info PPDB</a></li>
+      </ul>
+      {{-- buat dropdown gadget --}}
       <ul id="menuDropdown2" class="dropdown-content">
         <li> <a href="#">F.A.Q</a></li>
-        <li> <a href="#">Hubungi</a></li>
+        <li> <a href="#">Buat Pesan</a></li>
       </ul>
+      <ul id="dropdownPPDB2" class="dropdown-content">
+        <li><a href="/list_peserta">Peserta</a></li>
+        <li><a href="/info_ppdb">Info PPDB</a></li>
+      </ul>
+      {{-- end dropdown --}}
 
           <nav class="indigo darken-3">
-
               <div class="nav-wrapper container">
                 {{-- <a href="#" class="brand-logo">PPDB ONLINE</a> --}}
                 <a href="#" data-activates="mobile-menu" class="button-collapse">
@@ -44,30 +55,22 @@
                 <ul class="hide-on-med-and-down">
                   <li class="active"><a href="/">Home</a></li>
                   <li><a href="/profile">Profile</a></li>
-                  <li><a href="/info_ppdb">Info PPDB</a></li>
-                  <li><a href="/list_peserta">Peserta</a></li>
-                  <li><a href="#" class="dropdown-button" data-activates="menuDropdown">Help <i class="material-icons right">keyboard_arrow_down</i></a></li>
+                  <li><a href="#" class="dropdown-button" data-activates="dropdownPPDB">PPDB<i class="material-icons right">keyboard_arrow_down</i></a></li>
+                  <li><a href="#" class="dropdown-button" data-activates="menuDropdown">Bantuan<i class="material-icons right">keyboard_arrow_down</i></a></li>
                   @if (Auth::guest())
                     <li class="right"><a href="/login">Login</a></li>
                     <li class="right"><a href="/register">Daftar</a></li>
                   @else
                     <li class="right">
                         <a href="#" class="dropdown-button" data-activates="userDropdown">
-                            {{ Auth::user()->name }} <span class="caret"></span><i class="material-icons right">keyboard_arrow_down</i>
+                          {{ Auth::user()->name }} <span class="caret"></span><i class="material-icons right">keyboard_arrow_down</i>
                         </a>
-
                         <ul id="userDropdown" class="dropdown-content">
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+                          <li><a href="/biodata_saya">Biodata</a></li>
+                          <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                          </li>
                         </ul>
                     </li>
                   @endif
@@ -77,12 +80,23 @@
                 <ul class="side-nav" id="mobile-menu">
                   <li><a href="/">Home</a></li>
                   <li><a href="/profile">Profile</a></li>
-                  <li><a href="/info_ppdb">Info PPDB</a></li>
-                  <li><a href="/list_peserta">Peserta</a></li>
+                  <li><a href="#" class="dropdown-button" data-activates="dropdownPPDB2">PPDB<i class="material-icons right">keyboard_arrow_down</i></a></li>
                   <li><a href="#" class="dropdown-button" data-activates="menuDropdown2">Help <i class="material-icons right">keyboard_arrow_down</i></a></li>
                   @if (Auth::guest())
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Daftar</a></li>
+                  @else
+                    <li class="right">
+                        <a href="#" class="dropdown-button" data-activates="userDropdown2">
+                          {{ Auth::user()->name }} <span class="caret"></span><i class="material-icons right">keyboard_arrow_down</i>
+                        </a>
+                        <ul id="userDropdown2" class="dropdown-content">
+                          <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                          </li>
+                        </ul>
+                    </li>
                   @endif
 
                 </ul>
@@ -149,11 +163,17 @@
       <!-- <script src="materialize/js/jquery-3.1.1.min.js"></script> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <script src="/materialize/js/materialize.min.js"></script>
+      <script src="/js/custom.js"></script>
       <script>
         $(document).ready(function(){
           $('.slider').slider();
-
+          $('select').material_select();
           $('.button-collapse').sideNav();
+          @if ($errors->has('foto_upload'))
+            Materialize.toast('Upload Foto Gagal! <br> {{$errors->first('foto_upload')}}', 4000, 'red');
+          @elseif (Session::get('message'))
+             Materialize.toast('{{Session::get('message')}}', 4000, 'red');
+          @endif
         });
       </script>
   </body>
