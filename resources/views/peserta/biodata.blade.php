@@ -44,14 +44,17 @@
        </div>
     </div>
     {{-- end dmodal --}}
+
+    {{-- awal data diri --}}
     <div class="card">
       <div class="card-content">
         <div class="card-title center-align indigo-text"><strong>Biodata Peserta</strong></div>
         <div class="card-action ">
           {{-- <a id="edit" class="waves-effect waves-light indigo btn right"><i class="material-icons left">mode_edit</i>Edit</a> --}}
-          <a  class="tooltipped waves-effect waves-light indigo btn right"
+          <a  href="cetakform" class="tooltipped waves-effect waves-light indigo btn right"
             data-tooltip="lengkapi biodata dahulu!" data-position="right">
-            <i class="material-icons left">print</i><strike>Cetak Form</strike>
+            <i class="material-icons left">print</i>Cetak Form
+            {{-- <i class="material-icons left">print</i><strike>Cetak Form</strike> --}}
           </a>
 
           <div class="row">
@@ -63,19 +66,20 @@
             </div>
           </div>
 
+          <b class="indigo-text" style="font-size:110%;">PROFIL DATA ANDA</b>
           <form class="form-horizontal" role="form" method="post" action="/biodata_saya" enctype="multipart/form-data">
               {{ csrf_field() }}
-              <div class="row">
+              {{-- <div class="row">
                 <div class="input-field col s12">
                   <input required disabled value="{{$profile->id_registrasi}}" id="disabled" type="text" class="validate" name="id_registrasi">
                   <label for="disabled">ID Registrasi</label>
                 </div>
-              </div>
+              </div> --}}
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="nisn" type="text" class="validate" name="nisn" value="{{$profile->nisn}}">
-                  <label for="nis">NISN</label>
+                  <input required  id="nopeserta" type="text" class="validate" name="nopeserta" value="{{$profile->no_peserta}}">
+                  <label for="nopeserta">Nomor Peserta</label>
                 </div>
               </div>
 
@@ -87,32 +91,13 @@
               </div>
 
               <div class="row">
-                <div class="input-field col s12">
-                  <input required  id="asal" type="text" class="validate" name="asal" value="{{$profile->asal_sekolah}}">
-                  <label for="asal">Asal Sekolah</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="input-field col s12">
-                  <select required id="mySelect"  name="tahun">
-                    <option value="" disabled selected>Pilih salah satu</option>
-                    @foreach ($tahun as $tahuns)
-                      <option {{ ($profile->tahun_id==$tahuns->id) ? 'selected' : '_' }} value="{{$tahuns->id}}">{{$tahuns->tahun}}</option>
-                    @endforeach
-                  </select>
-                  <label>Tahun Lulus SMA/SLTA</label>
-                </div>
-              </div>
-
-              <div class="row">
                 <div class="input-field col s6">
-                  <input required  id="berat" type="text" class="validate" name="berat" value="{{$profile->berat_badan}}">
-                  <label for="berat">Berat Badan (Kg)</label>
+                  <input required  id="tempatlahir" type="text" class="validate" name="tempat_lahir" value="{{$profile->tempat_lahir}}">
+                  <label for="tempatlahir">Tempat lahir</label>
                 </div>
                 <div class="input-field col s6">
-                  <input required  id="tinggi" type="text" class="validate" name="tinggi" value="{{$profile->tinggi_badan}}">
-                  <label for="tinggi">Tinggi Badan (Cm)</label>
+                  <input required id="tanggallahir" type="text" class="datepicker" name="tanggal_lahir" value="{{$profile->tanggal_lahir}}">
+                  <label for="tanggallahir">Tanggal lahir</label>
                 </div>
               </div>
 
@@ -131,6 +116,29 @@
                 </div>
               </div>
 
+
+              <div class="row">
+                <div class="input-field col s4">
+                  <input required  id="goldarah" type="text" class="validate" name="gol_darah" value="{{$profile->gol_darah}}">
+                  <label for="goldarah">Golongan Darah</label>
+                </div>
+                <div class="input-field col s4">
+                  <input required  id="berat" type="text" class="validate" name="berat" value="{{$profile->berat_badan}}">
+                  <label for="berat">Berat Badan (Kg)</label>
+                </div>
+                <div class="input-field col s4">
+                  <input required  id="tinggi" type="text" class="validate" name="tinggi" value="{{$profile->tinggi_badan}}">
+                  <label for="tinggi">Tinggi Badan (Cm)</label>
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="input-field col s12">
+                      <textarea  id="alamat" class="materialize-textarea" name="alamat">{{$profile->alamat}}</textarea>
+                      <label for="alamat">Alamat tinggal</label>
+                  </div>
+              </div>
+
               <div class="row">
                 <div class="input-field col s12">
                   <select required  name="agama">
@@ -145,28 +153,35 @@
               </div>
 
               <div class="row">
-                  <div class="input-field col s12">
-                      <textarea  id="alamat" class="materialize-textarea" name="alamat">{{$profile->alamat}}</textarea>
-                      <label for="alamat">Alamat</label>
-                  </div>
+                <div class="input-field col s12">
+                  <input required  id="asal" type="text" class="validate" name="asal_sekolah" value="{{$profile->asal_sekolah}}">
+                  <label for="asal">Asal Sekolah</label>
+                </div>
               </div>
 
               <div class="row">
                   <div class="input-field col s12">
-                      <input required  id="nama_wali" type="text" name="ortu_wali" class="validate" value="{{$profile->ortu_wali}}">
-                      <label for="nama_wali">Nama Orang Tua/Wali</label>
+                      <textarea  id="alamat" class="materialize-textarea" name="alamat_sekolah">{{$profile->alamat_sekolah}}</textarea>
+                      <label for="alamatSekolah">Alamat Sekolah</label>
                   </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s12">
-                  <select required  name="pekerjaan">
+                  <select required id="mySelect"  name="tahun">
                     <option value="" disabled selected>Pilih salah satu</option>
-                    @foreach ($pekerjaan as $pekerjaans)
-                      <option {{ ($profile->pekerjaan_id==$pekerjaans->id) ? 'selected' : '_' }}  value="{{$pekerjaans->id}}">{{$pekerjaans->nama_pekerjaan}}</option>
+                    @foreach ($tahun as $tahuns)
+                      <option {{ ($profile->tahun_id==$tahuns->id) ? 'selected' : '_' }} value="{{$tahuns->id}}">{{$tahuns->tahun}}</option>
                     @endforeach
                   </select>
-                  <label>Pekerjaaan Orang Tua/Wali</label>
+                  <label>Tahun Lulus SMA/SLTA</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input required  id="noHp" type="text" class="validate" name="no_hp" value="{{$profile->no_hp}}">
+                  <label for="noHp">No Telp/Hp</label>
                 </div>
               </div>
 
@@ -189,7 +204,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              {{-- <div class="row">
                 <div class="file-field input-field col s7">
                   <div class="btn">
                     <span>Upload</span>
@@ -207,10 +222,10 @@
                       <span>Lampiran Anda: <a href="{{ asset('storage/lampiran/'. $profile->lampiran) }}"><i class="material-icons">insert_drive_file</i> {{$profile->lampiran}}</a></span>
                   @endif
                 </div>
-              </div>
+              </div> --}}
 
 
-              <div class="row">
+              {{-- <div class="row">
                   <div class="input-field offset-s12">
                     <button  type="submit" class="btn btn-primary right indigo">
                       <i class="material-icons">save</i> Simpan
@@ -218,10 +233,92 @@
                   </div>
               </div>
 
-          </form>
+          </form> --}}
         </div>
       </div>
     </div>
+    {{-- end card data diri --}}
+
+    {{-- awal data ortu --}}
+    <div class="card">
+      <div class="card-content">
+
+          <b class="indigo-text" style="font-size:110%;">PROFIL DATA ORANG TUA</b>
+              {{ csrf_field() }}
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <input required  id="namaAyah" type="text" class="validate" name="nama_ayah" value="{{$profile->nama_ayah}}">
+                  <label for="namaAyah">Nama Ayah</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input required  id="namaIbu" type="text" class="validate" name="nama_ibu" value="{{$profile->nama_ibu}}">
+                  <label for="namaIbu">Nama Ibu</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input required  id="noOrtu" type="text" class="validate" name="no_ortu" value="{{$profile->no_ortu}}">
+                  <label for="noOrtu">No Telp/Hp</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select required id="jobayah_select">
+                    <option value="" disabled selected>Pilih salah satu</option>
+                    @foreach ($pekerjaan as $pekerjaans)
+                      <option {{ ($profile->pekerjaan_ayah==$pekerjaans->id) ? 'selected' : '_' }}  value="{{$pekerjaans->id}}">{{$pekerjaans->nama_pekerjaan}}</option>
+                    @endforeach
+                  </select>
+                  <label>Pekerjaaan Ayah</label>
+                </div>
+              </div>
+              <input type="hidden" name="pekerjaan_ayah" id="jobayah" >
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select required  id="jobibu_select">
+                    <option value="" disabled selected>Pilih salah satu</option>
+                    @foreach ($pekerjaan as $pekerjaans)
+                      <option {{ ($profile->pekerjaan_ibu==$pekerjaans->id) ? 'selected' : '_' }}  value="{{$pekerjaans->id}}">{{$pekerjaans->nama_pekerjaan}}</option>
+                    @endforeach
+                  </select>
+                  <label>Pekerjaaan Ibu</label>
+                </div>
+              </div>
+              <input type="hidden" name="pekerjaan_ibu" id="jobibu" >
+
+              <div class="row">
+                  <div class="input-field col s12">
+                      <textarea  id="alamatOrtu" class="materialize-textarea" name="alamat_ortu">{{$profile->alamat_ortu}}</textarea>
+                      <label for="alamatOrtu">Alamat</label>
+                  </div>
+              </div>
+
+        </div>
+      </div>
+      {{-- End Card Data Orang tua --}}
+
+      <div class="card">
+        <div class="card-content">
+          <div class="row">
+              <div class="input-field offset-s12">
+                <button  type="submit" class="btn btn-primary right indigo">
+                  <i class="material-icons">save</i> Simpan
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </form>
+
   </div>
 
 </div>

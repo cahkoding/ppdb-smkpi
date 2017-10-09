@@ -6,9 +6,7 @@
 
   <div class="row">
     <div class="col s11">
-      <!-- Modal Upload Foto -->
 
-      @extends('layouts.uploadModal')
       <h4>Pesan</h4>
       {{-- <h4>Pesan</h4> --}}
       <ul id="tabs-swipe-demo" class="tabs tabs-fixed-width black">

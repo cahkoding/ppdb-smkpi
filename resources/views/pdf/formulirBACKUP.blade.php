@@ -20,90 +20,64 @@
 
 <br>
 <div class="" style="margin-left:25px;">
-  <b>A. DATA PRIBADI</b><br><br>
   <table border="">
     <tbody>
       <tr>
-        <td height="15" width="150">No Peserta</td>
+        <td height="20" width="150">No Pendaftaran</td>
         <td>: </td>
-        <td>{{$profile->no_peserta}}</td>
+        <td width="310" style="border: 1px solid black; padding-left:5px;"> -noDB- </td>
       </tr>
       <tr>
-        <td height="15" width="150">Nama Lengkap</td>
+        <td height="20">NISN</td>
         <td>: </td>
-        <td>{{$profile->nama}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->nisn}}</td>
       </tr>
       <tr>
-        <td height="15" width="150">Tempat, Tanggal Lahir</td>
+        <td height="20" width="150">Nama Lengkap</td>
         <td>: </td>
-        <td>{{$profile->tempat_lahir}}, {{date('j F Y', strtotime($profile->tanggal_lahir))}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->nama}}</td>
       </tr>
       <tr>
-        <td height="15" width="150">Jenis Kelamin</td>
+        <td height="20" width="150">Asal Sekolah</td>
         <td>: </td>
-        <td>{{$profile->tempat_lahir}}, {{$profile->jenis_kelamin}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->asal_sekolah}}</td>
       </tr>
       <tr>
-        <td height="15" width="150">Agama</td>
+        <td height="20" width="150">Nomor Handphone</td>
         <td>: </td>
-        <td>{{$profile->agama}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->no_hp}}</td>
       </tr>
       <tr>
-        <td height="15" width="150">Berat Badan</td>
+        <td height="20" width="150">No Peserta UN</td>
         <td>: </td>
-        <td>{{$profile->berat_badan}} kg</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->no_peserta_un}}</td>
       </tr>
       <tr>
-        <td height="15" width="150">Tinggi Badan</td>
+        <td height="20" width="150">Tahun Kelulusan</td>
         <td>: </td>
-        <td>{{$profile->tinggi_badan}} cm</td>
-      </tr>
-      <tr>
-        <td height="15" width="150">Golongan Darah</td>
-        <td>: </td>
-        <td>{{$profile->gol_darah}}</td>
-      </tr>
-    </table>
-    <br>
-    <b>B. DATA ORANG TUA</b><br><br>
-    <table border="">
-      <tr>
-        <td height="15" width="150">Nama Ayah</td>
-        <td>: </td>
-        <td>{{$profile->nama_ayah}}</td>
-      </tr>
-      <tr>
-        <td height="15" width="150">Pekerjaan Ayah</td>
-        <td>: </td>
-        <td>
-          @foreach ($pekerjaan as $pekerjaans)
-            {{($pekerjaans->id==$profile->pekerjaan_ayah) ? $pekerjaans->nama_pekerjaan : ''}}
-          @endforeach
+        <td style="border: 1px solid black; padding-left:5px;">
+          {{($profile->tahun_id<>0) ? $profile->tahun->tahun : ''}}
         </td>
       </tr>
       <tr>
-        <td height="15" width="150">Nama Ibu</td>
+        <td height="20" width="150">Berat Badan</td>
         <td>: </td>
-        <td>{{$profile->nama_ibu}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->berat_badan}} kg</td>
       </tr>
       <tr>
-        <td height="15" width="150">Pekerjaan Ayah</td>
+        <td height="20" width="150">Tinggi Badan</td>
         <td>: </td>
-        <td>
-          @foreach ($pekerjaan as $pekerjaans)
-            {{($pekerjaans->id==$profile->pekerjaan_ibu) ? $pekerjaans->nama_pekerjaan : ''}}
-          @endforeach
-        </td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->tinggi_badan}} cm</td>
       </tr>
       <tr>
-        <td height="15" width="150">Alamat</td>
+        <td height="20" width="150">Alamat Tinggal</td>
         <td>: </td>
-        <td>{{$profile->alamat_ortu}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->alamat}}</td>
       </tr>
       <tr>
-        <td height="15" width="150">Telepon</td>
+        <td height="20" width="150">Orang Tua/Wali</td>
         <td>: </td>
-        <td>{{$profile->no_ortu}}</td>
+        <td style="border: 1px solid black; padding-left:5px;">{{$profile->ortu_wali}}</td>
       </tr>
     </tbody>
   </table>

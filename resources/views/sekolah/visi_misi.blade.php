@@ -6,9 +6,6 @@
 
   <div class="row">
     <div class="col s11">
-      <!-- Modal Upload Foto -->
-
-      @extends('layouts.uploadModal')
 
         <div class="card">
           <div class="card-content">

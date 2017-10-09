@@ -46,32 +46,9 @@
 
 
 $().ready(function() {
-      $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15, // Creates a dropdown of 15 years to control year,
-    min: new Date(1990,3,20),
-    max: new Date(2010,7,14),
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    format: 'yyyy-mm-dd',
-    closeOnSelect: false // Close upon selecting a date,
-    });
-
     $('#reply').click(function(){
         $('#reply_div').toggle();
         $(window).scrollTop($('#reply_div').offset().top-20);
-    });
-
-    $( window ).on( "load", function() {
-      $('#jobayah').val($('#jobayah_select').val());
-      $('#jobibu').val($('#jobibu_select').val());
-    });
-    $('#jobayah_select').on('change', function() {
-      $('#jobayah').val($('#jobayah_select').val());
-    });
-    $('#jobibu_select').on('change', function() {
-      $('#jobibu').val($('#jobibu_select').val());
     });
 
     $('#edit').click(function() {
@@ -130,7 +107,7 @@ $(document).ready(function(){
       inDuration: 300, // Transition in duration
       outDuration: 200, // Transition out duration
       startingTop: '4%', // Starting top style attribute
-      endingTop: '26%', // 10% Ending top style attribute
+      endingTop: '15%', // 10% Ending top style attribute
       // ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
       //   alert("Ready");
       //   console.log(modal, trigger);

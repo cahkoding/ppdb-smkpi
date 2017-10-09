@@ -6,10 +6,6 @@
 
   <div class="row">
     <div class="col s11">
-      <!-- Modal Upload Foto -->
-
-      @extends('layouts.uploadModal')
-
       <h4>Control Panel Informasi</h4>
 
       <a href="/info/create" class="waves-effect waves-light btn white black-text"><i class="material-icons left">create</i>Tambahkan Info</a>

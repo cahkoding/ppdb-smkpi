@@ -6,9 +6,6 @@
 
   <div class="row">
     <div class="col s11">
-      <!-- Modal Upload Foto -->
-
-      @extends('layouts.uploadModal')
 
       <h4>Control Panel Informasi</h4>
       <center>

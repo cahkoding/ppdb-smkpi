@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
     <style media="screen">
-        body { display: flex; min-height: 100vh; flex-direction: column; }
+        body { display: flex; min-height: 100vh; flex-direction: column; background-color: #e6e6fa;}
         main { flex: 1 0 auto; }
         .tabs .indicator {background-color: white;}
 }
@@ -91,6 +91,7 @@
                           {{ Auth::user()->name }} <span class="caret"></span><i class="material-icons right">keyboard_arrow_down</i>
                         </a>
                         <ul id="userDropdown2" class="dropdown-content">
+                          <li><a href="/biodata_saya">Biodata</a></li>
                           <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>

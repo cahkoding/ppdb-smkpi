@@ -6,9 +6,6 @@
 
   <div class="row">
     <div class="col s11">
-      <!-- Modal Upload Foto -->
-
-      @extends('layouts.uploadModal')
 
       <h4>daftar peserta</h4>
 
