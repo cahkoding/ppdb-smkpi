@@ -20,7 +20,6 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
-
   </head>
   <body>
 
@@ -167,6 +166,11 @@
       <script src="/js/custom.js"></script>
       <script>
         $(document).ready(function(){
+          @if ($errors->any())
+            $(document).ready(function(){
+              $('#reply').click();
+            });
+          @endif
           $('.slider').slider();
           $('select').material_select();
           $('.button-collapse').sideNav();

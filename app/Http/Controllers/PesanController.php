@@ -10,6 +10,8 @@ use App\Models\Pesan;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Events\UserMengirimPesan;
+use App\Http\Requests\SendRequest;
+use App\Http\Requests\ReplyRequest;
 
 class PesanController extends Controller
 {
@@ -30,7 +32,7 @@ class PesanController extends Controller
     }
 
 
-    public function send(Request $request)
+    public function send(SendRequest $request)
     {
         Pesan::create([
             'id_peserta' => Auth::user()->id,
@@ -39,11 +41,11 @@ class PesanController extends Controller
             'lampiran' => MyLib::LampiranPesan($request),
             'pengirim' => 'peserta',
         ]);  event(new UserMengirimPesan());
-        return redirect('/pesan')->with('message', 'Pesan berhasil dikirim!');
+        return redirect('/pesan#tulis-pesan')->with('message', 'Pesan berhasil dikirim!');
     }
 
 
-    public function reply(Request $request, $id)
+    public function reply(ReplyRequest $request, $id)
     {
         Pesan::create([
             'id_peserta' => Auth::user()->id,

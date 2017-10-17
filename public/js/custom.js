@@ -43,6 +43,11 @@
 //     });
 // });
 
+var ukuran = 0;
+$('#lampiran-file').bind('change', function() {
+ukuran = this.files[0].size/1024/1024;
+   //alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
+});
 
 
 $().ready(function() {
