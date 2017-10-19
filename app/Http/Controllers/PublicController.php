@@ -25,7 +25,7 @@ class PublicController extends Controller
 
   public function info_ppdb()
   {
-      $info = Info::paginate(14);
+      $info = Info::orderBy('created_at', 'desc')->paginate(14);
       return view('public.info', compact('info'));
   }
   public function info_detail($id)

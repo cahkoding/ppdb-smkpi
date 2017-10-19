@@ -36,7 +36,7 @@
                  <a href="/hapusinfo/{{$infos->id}}" onclick="return confirm('hapus info {{$infos->title}}?')">
                    <i class="material-icons black-text">delete_forever</i>
                  </a>
-                 <a href="cetakInfo/{{$infos->id}}"><i class="material-icons black-text">print</i></a>
+                 <a href="cetakinfo/{{$infos->id}}"><i class="material-icons black-text">print</i></a>
                </td>
              </tr>
            @endforeach

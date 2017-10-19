@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SimpanRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ use App\Models\Tahun;
 use App\User;
 use PDF;
 use Auth;
+use MyLib;
 
 class AdminController extends Controller
 {
@@ -32,9 +34,11 @@ class AdminController extends Controller
 
     public function cetakForm($id)
     {
-        $profile = Profile::Where('user_id',$id)->get()->first();
+        $tahun   = Tahun::all();
+        $pekerjaan = Pekerjaan::all();
         $nilai   = Nilai::Where('user_id',$id)->get()->first();
-        $pdf=PDF::loadView('pdf.formulir', compact('profile', 'nilai'));
+        $profile = Profile::Where('user_id',$id)->get()->first();
+        $pdf=PDF::loadView('pdf.formulir', compact('profile', 'nilai', 'pekerjaan', 'tahun'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream('formulir.pdf');
     }
@@ -55,41 +59,37 @@ class AdminController extends Controller
         return view('admin.edit', compact('profile','tahun','pekerjaan','nilai'));
     }
 
-    public function update(Request $request, $id)
+    public function update(SimpanRequest $request, $id)
     {
-
-        if ($request->file('lampiran')!=null) {
-            if($request->tmp_lampiran!=null){
-                Storage::delete('public/lampiran/'.$request->tmp_lampiran);
-            }
-            $filename = time().'_'.$request->file('lampiran')->getClientOriginalName();
-            $request->file('lampiran')->storeAs('public/lampiran', $filename);
-        }else{
-            $filename = ($request->tmp_lampiran!=null) ? $request->tmp_lampiran : '';
-        }
-
-
         Profile::Where('user_id',$id)->update([
-            'nisn' => $request->nisn,
-            'nama' => $request->nama,
-            'asal_sekolah' => $request->asal,
-            'no_peserta_un'=> $request->no_un,
-            'tahun_id'=> $request->tahun,
-            'berat_badan' => $request->berat,
-            'tinggi_badan'=> $request->tinggi,
-            'jenis_kelamin' => $request->jenkel,
-            'agama' => $request->agama,
-            'alamat'=> $request->alamat,
-            'ortu_wali'=> $request->ortu_wali,
-            'pekerjaan_id'=> $request->pekerjaan,
-            'lampiran'=> $filename,
+          'nama' => $request->nama,
+          'tempat_lahir' => $request->tempat_lahir,
+          'tanggal_lahir'=> $request->tanggal_lahir,
+          'jenis_kelamin' => $request->jenkel,
+          'gol_darah' => $request->gol_darah,
+          'berat_badan' => $request->berat,
+          'tinggi_badan'=> $request->tinggi,
+          'alamat'=> $request->alamat,
+          'agama' => $request->agama,
+          'asal_sekolah' => $request->asal_sekolah,
+          'alamat_sekolah' => $request->alamat_sekolah,
+          'tahun_id'=> $request->tahun,
+          'no_hp'=>$request->no_hp,
+          // Data ortu
+          'nama_ayah' => $request->nama_ayah,
+          'nama_ibu' => $request->nama_ibu,
+          'no_ortu'=>$request->no_ortu,
+          'pekerjaan_ayah' => $request->pekerjaan_ayah,
+          'pekerjaan_ibu' => $request->pekerjaan_ibu,
+          'alamat_ortu'=> $request->alamat_ortu,
+          // 'lampiran'=> MyLib::UpdateLampiran($request),
         ]);
 
         Nilai::Where('user_id',$id)->update([
-            'ipa' => $request->n_ipa,
-            'matematika' => $request->n_math,
-            'bahasa_indonesia' => $request->n_bindo,
-            'bahasa_inggris'=> $request->n_bing,
+          'ipa' => $request->n_ipa,
+          'matematika' => $request->n_math,
+          'bahasa_indonesia' => $request->n_bindo,
+          'bahasa_inggris'=> $request->n_bing,
         ]);
         return redirect('edit/'.$id)->with('message','Data Berhasil disimpan!');
     }
@@ -113,43 +113,35 @@ class AdminController extends Controller
 
     public function send(Request $request)
     {
-      $filename=null;
-      if ($request->file('lampiran')!=null) {
-          $filename = time().'_'.$request->file('lampiran')->getClientOriginalName();
-          $request->file('lampiran')->storeAs('public/lampiran', $filename);
-      }
-
       Pesan::create([
           'id_peserta' => $request->userid,
           'id_admin' => Auth::User()->id,
           'subjek' => $request->subject,
           'pesan_teks' => $request->pesan,
-          'lampiran' => $filename,
+          'lampiran' => MyLib::UploadLampiran($request),
           'pengirim' => 'admin',
       ]);
-
       return redirect('/pesan_admin')->with('message', 'Pesan berhasil dikirim!');
     }
 
     public function reply(Request $request, $id)
     {
-      $filename=null;
-      if ($request->file('lampiran')!=null) {
-          $filename = time().'_'.$request->file('lampiran')->getClientOriginalName();
-          $request->file('lampiran')->storeAs('public/lampiran', $filename);
-      }
-
       Pesan::create([
           'id_admin' => Auth::user()->id,
           'id_peserta' => $request->id_peserta,
           'subjek' => $request->subject,
           'pesan_teks' => $request->pesan,
-          'lampiran' => $filename,
+          'lampiran' => MyLib::UploadLampiran($request),
           'pengirim' => 'admin',
           'jenis_pesan' => 'reply',
       ]);
-
       return redirect('/pesan_admin')->with('message', 'berhasil membalas pesan!');
+    }
+
+    public function hasil_seleksi()
+    {
+        $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+        return view('admin.hasil_seleksi', compact('profile'));
     }
 
     public function cetakLap()

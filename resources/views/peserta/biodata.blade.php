@@ -72,28 +72,28 @@
               {{ csrf_field() }}
               {{-- <div class="row">
                 <div class="input-field col s12">
-                  <input required disabled value="{{$profile->id_registrasi}}" id="disabled" type="text" class="validate" name="id_registrasi">
+                  <input required disabled value="{{$profile->id_registrasi}}" id="disabled" type="text"  name="id_registrasi">
                   <label for="disabled">ID Registrasi</label>
                 </div>
               </div> --}}
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="nopeserta" type="text" class="validate" name="nopeserta" value="{{$profile->no_peserta}}">
+                  <input required  id="nopeserta" type="text"  name="nopeserta" value="{{$profile->no_peserta}}">
                   <label for="nopeserta">Nomor Peserta</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="nama" type="text" class="validate" name="nama" value="@if($errors->has('nama')) {{old('nama')}} @else {{$profile->nama}} @endif">
+                  <input required  id="nama" type="text"  name="nama" value="@if($errors->has('nama')) {{old('nama')}} @else {{$profile->nama}} @endif">
                   <label for="nama">Nama Lengkap @if($errors->has('nama')) <li><span class="{{$notifErr}}">{{$errors->first('nama')}}</span></li> @endif</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s6">
-                  <input required  id="tempatlahir" type="text" class="validate" name="tempat_lahir" value="@if($errors->has('tempat_lahir')) {{old('tempat_lahir')}} @else {{$profile->tempat_lahir}} @endif">
+                  <input required  id="tempatlahir" type="text"  name="tempat_lahir" value="@if($errors->has('tempat_lahir')) {{old('tempat_lahir')}} @else {{$profile->tempat_lahir}} @endif">
                   <label for="tempatlahir">Tempat lahir @if($errors->has('tempat_lahir')) <li><span class="{{$notifErr}}">{{$errors->first('tempat_lahir')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s6">
@@ -121,15 +121,15 @@
 
               <div class="row">
                 <div class="input-field col s4">
-                  <input required  id="goldarah" type="text" class="validate" name="gol_darah" value="@if($errors->has('gol_darah')) {{old('gol_darah')}} @else {{$profile->gol_darah}} @endif">
+                  <input required  id="goldarah" type="text"  name="gol_darah" value="@if($errors->has('gol_darah')) {{old('gol_darah')}} @else {{$profile->gol_darah}} @endif">
                   <label for="goldarah">Golongan Darah @if($errors->has('gol_darah')) <li><span class="{{$notifErr}}">{{$errors->first('gol_darah')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s4">
-                  <input required  id="berat" type="text" class="validate" name="berat" value="@if($errors->has('berat')) {{old('berat')}} @else {{$profile->berat_badan}} @endif">
+                  <input required  id="berat" type="text"  name="berat" value="@if($errors->has('berat')) {{old('berat')}} @else {{$profile->berat_badan}} @endif">
                   <label for="berat">Berat Badan (Kg) @if($errors->has('berat')) <li><span class="{{$notifErr}}">{{$errors->first('berat')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s4">
-                  <input required  id="tinggi" type="text" class="validate" name="tinggi" value="@if($errors->has('tinggi')) {{old('tinggi')}} @else {{$profile->tinggi_badan}} @endif">
+                  <input required  id="tinggi" type="text"  name="tinggi" value="@if($errors->has('tinggi')) {{old('tinggi')}} @else {{$profile->tinggi_badan}} @endif">
                   <label for="tinggi">Tinggi Badan (Cm) @if($errors->has('tinggi')) <li><span class="{{$notifErr}}">{{$errors->first('tinggi')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -156,7 +156,7 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="asal" type="text" class="validate" name="asal_sekolah" value="@if($errors->has('asal_sekolah')) {{old('asal_sekolah')}} @else {{$profile->asal_sekolah}} @endif">
+                  <input required  id="asal" type="text"  name="asal_sekolah" value="@if($errors->has('asal_sekolah')) {{old('asal_sekolah')}} @else {{$profile->asal_sekolah}} @endif">
                   <label for="asal">Asal Sekolah @if($errors->has('agama')) <li><span class="{{$notifErr}}">{{$errors->first('agama')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -182,26 +182,26 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="noHp" type="text" class="validate" name="no_hp" value="@if($errors->has('no_hp')) {{old('no_hp')}} @else {{$profile->no_hp}} @endif">
+                  <input required  id="noHp" type="text"  name="no_hp" value="@if($errors->has('no_hp')) {{old('no_hp')}} @else {{$profile->no_hp}} @endif">
                   <label for="noHp">No Telp/Hp @if($errors->has('no_hp')) <li><span class="{{$notifErr}}">{{$errors->first('no_hp')}}</span></li> @endif</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s3">
-                  <input required   id="n_ipa" type="text" class="validate" name="n_ipa" value="@if($errors->has('n_ipa')) {{old('n_ipa')}} @else {{$nilai->ipa}} @endif">
+                  <input required   id="n_ipa" type="text"  name="n_ipa" value="@if($errors->has('n_ipa')) {{old('n_ipa')}} @else {{$nilai->ipa}} @endif">
                   <label for="n_ipa">UN IPA @if($errors->has('n_ipa')) <li><span class="{{$notifErr}}">{{$errors->first('n_ipa')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s3">
-                  <input  required  id="n_ipa" type="text" class="validate" name="n_math" value="@if($errors->has('n_math')) {{old('n_math')}} @else {{$nilai->matematika}} @endif">
+                  <input  required  id="n_ipa" type="text"  name="n_math" value="@if($errors->has('n_math')) {{old('n_math')}} @else {{$nilai->matematika}} @endif">
                   <label for="n_math">UN MATEMATIKA @if($errors->has('n_math')) <li><span class="{{$notifErr}}">{{$errors->first('n_math')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s3">
-                  <input required  id="n_bindo" type="text" class="validate" name="n_bindo" value="@if($errors->has('n_bindo')) {{old('n_bindo')}} @else {{$nilai->bahasa_indonesia}} @endif">
+                  <input required  id="n_bindo" type="text"  name="n_bindo" value="@if($errors->has('n_bindo')) {{old('n_bindo')}} @else {{$nilai->bahasa_indonesia}} @endif">
                   <label for="n_bindo">UN BAHASA INDONESIA @if($errors->has('n_bindo')) <li><span class="{{$notifErr}}">{{$errors->first('n_bindo')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s3">
-                  <input required  id="n_bing" type="text" class="validate" name="n_bing" value="@if($errors->has('n_bing')) {{old('n_bing')}} @else {{$nilai->bahasa_inggris}} @endif">
+                  <input required  id="n_bing" type="text"  name="n_bing" value="@if($errors->has('n_bing')) {{old('n_bing')}} @else {{$nilai->bahasa_inggris}} @endif">
                   <label for="n_bing">UN BAHASA INGGRIS @if($errors->has('n_bing')) <li><span class="{{$notifErr}}">{{$errors->first('n_bing')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -250,19 +250,19 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="namaAyah" type="text" class="validate" name="nama_ayah" value="@if($errors->has('nama_ayah')) {{old('nama_ayah')}} @else {{$profile->nama_ayah}} @endif">
+                  <input required  id="namaAyah" type="text"  name="nama_ayah" value="@if($errors->has('nama_ayah')) {{old('nama_ayah')}} @else {{$profile->nama_ayah}} @endif">
                   <label for="namaAyah">Nama Ayah @if($errors->has('nama_ayah')) <li><span class="{{$notifErr}}">{{$errors->first('nama_ayah')}}</span></li> @endif</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="namaIbu" type="text" class="validate" name="nama_ibu" value="@if($errors->has('nama_ibu')) {{old('nama_ibu')}} @else {{$profile->nama_ibu}} @endif">
+                  <input required  id="namaIbu" type="text"  name="nama_ibu" value="@if($errors->has('nama_ibu')) {{old('nama_ibu')}} @else {{$profile->nama_ibu}} @endif">
                   <label for="namaIbu">Nama Ibu @if($errors->has('nama_ibu')) <li><span class="{{$notifErr}}">{{$errors->first('nama_ibu')}}</span></li> @endif</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="noOrtu" type="text" class="validate" name="no_ortu" value="@if($errors->has('no_ortu')) {{old('no_ortu')}} @else {{$profile->no_ortu}} @endif">
+                  <input required  id="noOrtu" type="text"  name="no_ortu" value="@if($errors->has('no_ortu')) {{old('no_ortu')}} @else {{$profile->no_ortu}} @endif">
                   <label for="noOrtu">No Telp/Hp @if($errors->has('no_ortu')) <li><span class="{{$notifErr}}">{{$errors->first('no_ortu')}}</span></li> @endif</label>
                 </div>
               </div>

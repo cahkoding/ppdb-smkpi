@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
 use Auth;
 use MyLib;
 use App\Models\Info;
@@ -55,7 +55,7 @@ class InfoController extends Controller
         return view('info.show', compact('info', 'profile'));
     }
 
-    public function update(Request $request, $id)
+    public function update(InformasiRequest $request, $id)
     {
         Info::find($id)->update([
             'title'=> $request->title,
@@ -64,6 +64,14 @@ class InfoController extends Controller
             'gambar' => MyLib::UpdateGambar($request),
         ]);
         return redirect('info/'.$id)->with('message', 'Info berhasil disimpan!');
+    }
+
+    public function cetakInfo($id)
+    {
+        $info = Info::find($id);
+        $pdf=PDF::loadView('pdf.informasi', compact('info'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream('informasi.pdf');
     }
 
 }

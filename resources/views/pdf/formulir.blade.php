@@ -1,3 +1,14 @@
+<style media="screen">
+body {
+padding: .2in;
+}
+.font {
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size:12px;
+    padding: 10px;
+}
+
+</style>
 
 <table border="">
   <tr>
@@ -5,10 +16,10 @@
       <img src="img/logo.png" width="70" alt="">
     </td>
     <td style="text-align:center; " width="100" >
-      <strong>E-FORM PPDB</strong>
+      <strong  style="font-size:14px;">E-FORM PPDB</strong>
     </td>
     <td style="text-align:right;">
-      <strong>SMK PI AMBARRUKMO 1 SLEMAN <br></strong>
+      <strong style="font-size:14px;">SMK PI AMBARRUKMO 1 SLEMAN <br></strong>
       <span style="font-size:12px;"><i>Jl. Cendrawasih 125 Mancasan lor, Condong Catur, Depok, Sleman Telp. (0274)4477515 <br>
       Website: http://localhost/psbonline | E-Mail: smkpiambarrukmo@yahoo.co.id
       </i></span>
@@ -16,12 +27,12 @@
   </tr>
 </table>
 
-<hr style="border-width: 1px;">
+<hr style="border-width: 2px;">
 
 <br>
-<div class="" style="margin-left:25px;">
+<div class="font" style="margin-left:25px;">
   <b>A. DATA PRIBADI</b><br><br>
-  <table border="">
+  <table border="" >
     <tbody>
       <tr>
         <td height="15" width="150">No Peserta</td>
@@ -111,7 +122,7 @@
 
 <br>
 
-<table border="1" align="center" style="text-align: center;">
+<table border="1" align="center" style="text-align: center;" class="font">
   <thead>
     <tr>
       <td colspan="4">Nilai ujian Nasional</td>
@@ -139,7 +150,7 @@
 @endphp
 
 <br><br><br>
-<table align="center" style="text-align:center;" border="">
+<table align="center" style="text-align:center;" border="" class="font">
   <tr>
     <td width="100" rowspan="3"><img src="storage/foto/{{$profile->foto}}" width="90" height="115" alt=""></td>
     <td width="20" rowspan="3"> </td>

@@ -30,8 +30,8 @@ class InformasiRequest extends FormRequest
         return [
           'title'  => 'required|max:30',
           'isi_info' => 'required|max:700',
-          'gambar' => 'mimes:jpg,png,pdf,rar|max:1500',
-          'lampiran' => 'mimes:jpg,png,pdf,rar|max:1500',
+          'gambar' => 'mimes:jpeg,png,pdf,rar|max:1500',
+          'lampiran' => 'mimes:jpeg,png,pdf,rar|max:1500',
         ];
     }
 

@@ -60,6 +60,7 @@
                     <li class="right"><a href="/login">Login</a></li>
                     <li class="right"><a href="/register">Daftar</a></li>
                   @else
+                    <li><a href="/hasil_seleksi"><i class="material-icons right">flag</i>Hasil Seleksi</a></li>
                     <li class="right">
                         <a href="#" class="dropdown-button" data-activates="userDropdown">
                           {{ Auth::user()->name }} <span class="caret"></span><i class="material-icons right">keyboard_arrow_down</i>
@@ -103,7 +104,7 @@
               </div>
           </nav>
       <!-- </div> -->
-      <br><br>
+      <br>
       <main>
         <div class="container">
             @yield('konten')

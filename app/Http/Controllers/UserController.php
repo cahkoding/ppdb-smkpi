@@ -65,6 +65,7 @@ class UserController extends Controller
             'pekerjaan_ayah' => $request->pekerjaan_ayah,
             'pekerjaan_ibu' => $request->pekerjaan_ibu,
             'alamat_ortu'=> $request->alamat_ortu,
+            'status_biodata'=>'Lengkap',
             // 'lampiran'=> MyLib::UpdateLampiran($request),
         ]);
 
