@@ -11,7 +11,7 @@ class MyLib
     public static function getProfile() {return $profile=Profile::Where('user_id', Auth::user()->id)->get()->first();}
 
 
-    public static function LampiranPesan($request)
+    public static function UploadLampiran($request)
     {
         $filename=null;
         if ($request->file('lampiran')!=null) {
@@ -21,8 +21,17 @@ class MyLib
         return $filename;
     }
 
+    public static function UploadGambar($request)
+    {
+        $gambar=null;
+        if ($request->file('gambar')!=null) {
+            $gambar = time().'_'.$request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->storeAs('public/foto', $gambar);
+        }
+        return $gambar;
+    }
 
-    public static function LampiranBiodata($request)
+    public static function UpdateLampiran($request)
     {
         if ($request->file('lampiran')!=null) {
             if($request->tmp_lampiran!=null){
@@ -36,5 +45,18 @@ class MyLib
         return $filename;
     }
 
+    public static function UpdateGambar($request)
+    {
+        if ($request->file('gambar')!=null) {
+            if($request->tmp_gambar!=null){
+                Storage::delete('public/foto/'.$request->tmp_gambar);
+            }
+            $gambar = time().'_'.$request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->storeAs('public/foto', $gambar);
+        }else{
+            $gambar   = ($request->tmp_gambar!=null) ? $request->tmp_gambar : null;
+        }
+        return $gambar;
+    }
 
 }

@@ -38,7 +38,7 @@ class PesanController extends Controller
             'id_peserta' => Auth::user()->id,
             'subjek' => $request->subject,
             'pesan_teks' => $request->pesan,
-            'lampiran' => MyLib::LampiranPesan($request),
+            'lampiran' => MyLib::UploadLampiran($request),
             'pengirim' => 'peserta',
         ]);  event(new UserMengirimPesan());
         return redirect('/pesan#tulis-pesan')->with('message', 'Pesan berhasil dikirim!');
@@ -51,7 +51,7 @@ class PesanController extends Controller
             'id_peserta' => Auth::user()->id,
             'subjek' => $request->subject,
             'pesan_teks' => $request->pesan,
-            'lampiran' => MyLib::LampiranPesan($request),
+            'lampiran' => MyLib::UploadLampiran($request),
             'pengirim' => 'peserta',
             'jenis_pesan' => 'reply',
         ]);  event(new UserMengirimPesan());

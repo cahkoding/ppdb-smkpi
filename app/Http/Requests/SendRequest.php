@@ -30,7 +30,7 @@ class SendRequest extends FormRequest
         return [
           'subject'  => 'required|max:30',
           'pesan' => 'required|max:250',
-          'lampiran' => 'mimes:jpg,png,pdf,rar|max:1000'
+          'lampiran' => 'mimes:jpg,png,pdf,rar|max:1500'
         ];
     }
 

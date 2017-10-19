@@ -7,6 +7,7 @@ use MyLib;
 use App\Models\Profile;
 use App\Models\Sekolah;
 use Illuminate\Http\Request;
+use App\Http\Requests\SekolahRequest;
 
 class SekolahController extends Controller
 {
@@ -17,9 +18,9 @@ class SekolahController extends Controller
   }
 
 
-  public function tentang_sekolah_store(Request $request)
+  public function tentang_sekolah_store(SekolahRequest $request)
   {
-      Sekolah::Where('id', 1)->update(['teks'=>$request->teks]);
+      Sekolah::Where('id', 1)->update(['teks'=>$request->teks,'lampiran' => MyLib::UpdateLampiran($request)]);
       return redirect('/tentang_sekolah')->with('message','Data Berhasil disimpan!');
   }
 
@@ -31,9 +32,9 @@ class SekolahController extends Controller
   }
 
 
-  public function visi_misi_store(Request $request)
+  public function visi_misi_store(SekolahRequest $request)
   {
-      Sekolah::Where('id', 2)->update(['teks'=>$request->teks]);
+      Sekolah::Where('id', 2)->update(['teks'=>$request->teks,'lampiran' => MyLib::UpdateLampiran($request)]);
       return redirect('/visi_misi')->with('message','Data Berhasil disimpan!');
   }
 
@@ -45,9 +46,9 @@ class SekolahController extends Controller
   }
 
 
-  public function lokasi_store(Request $request)
+  public function lokasi_store(SekolahRequest $request)
   {
-      Sekolah::Where('id', 3)->update(['teks'=>$request->teks]);
+      Sekolah::Where('id', 3)->update(['teks'=>$request->teks,'lampiran' => MyLib::UpdateLampiran($request)]);
       return redirect('/lokasi')->with('message','Data Berhasil disimpan!');
   }
 

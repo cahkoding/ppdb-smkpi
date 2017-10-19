@@ -45,7 +45,7 @@
 
 var ukuran = 0;
 $('#lampiran-file').bind('change', function() {
-ukuran = this.files[0].size/1024/1024;
+ukuran = this.files[0].size/1500/1500;
    //alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
 });
 

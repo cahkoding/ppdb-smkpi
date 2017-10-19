@@ -13,6 +13,7 @@ use App\Models\Pekerjaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
+use App\Http\Requests\SimpanRequest;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -41,7 +42,7 @@ class UserController extends Controller
     }
 
 
-    public function simpan(Request $request)
+    public function simpan(SimpanRequest $request)
     {
         Profile::Where('user_id',Auth::user()->id)->update([
             'nama' => $request->nama,
@@ -64,7 +65,7 @@ class UserController extends Controller
             'pekerjaan_ayah' => $request->pekerjaan_ayah,
             'pekerjaan_ibu' => $request->pekerjaan_ibu,
             'alamat_ortu'=> $request->alamat_ortu,
-            // 'lampiran'=> MyLib::LampiranBiodata($request),
+            // 'lampiran'=> MyLib::UpdateLampiran($request),
         ]);
 
         Nilai::Where('user_id',Auth::user()->id)->update([
