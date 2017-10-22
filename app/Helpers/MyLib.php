@@ -59,4 +59,16 @@ class MyLib
         return $gambar;
     }
 
+    public static function getIDSelect($request)
+    {
+        $id=$request->id;
+        $row=count($id);
+        $i=0;
+        foreach ($id as $s) {
+          echo $s;
+          if ($i!=$row-1) echo ",";
+          $i++;
+        }
+    }
+
 }

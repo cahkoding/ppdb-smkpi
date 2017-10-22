@@ -13,8 +13,14 @@ Route::get('info_ppdb/{id}', 'PublicController@info_detail');
 Route::group(['middleware'=>'admin'], function(){
     Route::get('cetaklap', 'AdminController@cetakLap');
 
+    Route::get('admin/user', 'adminController@admin_user');
+    Route::get('admin/tambah_user', 'adminController@tambah_admin_user');
+    Route::post('admin/tambah_user', 'adminController@store_admin_user');
+
     Route::get('admin', 'adminController@index');
     Route::get('peserta', 'adminController@peserta');
+    Route::post('peserta', 'adminController@apply');
+    Route::get('_peserta', 'adminController@cari_peserta');
     Route::get('cetakform/{id}', 'AdminController@cetakForm');
     Route::get('hapus/{id}', 'AdminController@hapus');
     Route::get('edit/{id}', 'AdminController@edit');

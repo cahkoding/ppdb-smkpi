@@ -85,7 +85,20 @@
                           </li>
                         </ul>
                       </li>
-                      <li><a class="waves-effect waves-teal" href="/peserta"><i class="material-icons">perm_identity</i>Peserta</a></li>
+                      <li class="no-padding">
+                        <ul class="collapsible collapsible-accordion">
+                          <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">person</i>Users</a>
+                            <div class="collapsible-body">
+                              <ul>
+                                <li><a href="/admin/user">Admin</a></li>
+                                <li><a href="/peserta">Peserta</a></li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                      {{-- <li><a class="waves-effect waves-teal" href="/user"><i class="material-icons">account_box</i>Panitia</a></li>
+                      <li><a class="waves-effect waves-teal" href="/peserta"><i class="material-icons">person</i>Peserta</a></li> --}}
                       {{-- <li><a class="waves-effect waves-teal" href="/syarat_alur"><i class="material-icons">content_paste</i>Syarat & Alur</a></li> --}}
                       <li><a class="waves-effect waves-teal" href="/info"><i class="material-icons">info</i>Informasi</a></li>
                       <li><a class="waves-effect waves-teal" href="/laporan"><i class="material-icons">book</i>Laporan</a></li>

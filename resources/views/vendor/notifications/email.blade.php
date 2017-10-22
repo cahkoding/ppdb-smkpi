@@ -41,11 +41,17 @@
 
 @endforeach
 
-<!-- Salutation -->
+{{-- <!-- Salutation -->
 @if (! empty($salutation))
 {{ $salutation }}
 @else
 Regards,<br>{{ config('app.name') }}
+@endif --}}
+<!-- Salutation -->
+@if (! empty($salutation))
+{{ $salutation }}
+@else
+Regards,<br>Panitia PPDB
 @endif
 
 <!-- Subcopy -->

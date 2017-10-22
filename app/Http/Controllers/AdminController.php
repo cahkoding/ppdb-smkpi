@@ -1,21 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\SimpanRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-
-use App\Models\Pekerjaan;
-use App\Models\Profile;
-use App\Models\Pesan;
-use App\Models\Nilai;
-use App\Models\Tahun;
-use App\User;
 use PDF;
 use Auth;
 use MyLib;
+use App\User;
+use App\Models\Pesan;
+use App\Models\Nilai;
+use App\Models\Tahun;
+use App\Models\Profile;
+use App\Models\Pekerjaan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\SimpanRequest;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -28,7 +27,50 @@ class AdminController extends Controller
     public function peserta()
     {
         $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
-        $users = User::Where('role','<>',2)->paginate(7);
+        $users = Profile::paginate(7);
+        return view('admin.peserta', compact('users', 'profile'));
+    }
+
+    public function admin_user()
+    {
+        $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+        $users = User::whereIn('role',[2,3])->paginate(7);
+        return view('admin.user_admin', compact('profile', 'users'));
+    }
+
+    public function tambah_admin_user()
+    {
+        $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+        return view('admin.tambah_user_admin', compact('profile'));
+    }
+
+    public function store_admin_user(UserRequest $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+        ]);
+        return redirect('/admin/user')->with('message', $request->email.' Berhasil ditambahkan!');
+    }
+
+    public function apply(Request $request)
+    {
+        // by KhihadySucahyo, Kalo Objek manggil onbjek gaperlu diekstrak objeknya wkwk
+        $arr = array_merge(array_map('intval', array_slice($request->id, 0)));
+        $users = Profile::whereIn('user_id', [$arr])->update(['status_diterima'=>'Lulus']);
+        return redirect()->back()->with('message','Berhasil apply!');
+    }
+
+    public function cari_peserta(Request $request)
+    {
+        $par=$request->search;
+        $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+        $users = Profile::Where('no_peserta','like',"%{$par}%")
+                        ->orWhere('nama','like',"%{$par}%")
+                        ->orWhere('asal_sekolah','like',"%{$par}%")
+                        ->paginate(7);
         return view('admin.peserta', compact('users', 'profile'));
     }
 
@@ -45,9 +87,9 @@ class AdminController extends Controller
 
     public function hapus($id)
     {
-        $profile = Profile::Where('user_id',$id)->get()->first();
+        $profile = User::Where('id',$id)->get()->first();
         User::destroy($id);
-        return redirect('/peserta')->with('destroy_message', 'Peserta '.$profile->nama.' telah dihapus!');
+        return redirect()->back()->with('destroy_message', 'Peserta '.$profile->email.' telah dihapus!');
     }
 
     public function edit($id)
