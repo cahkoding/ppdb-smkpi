@@ -2,7 +2,8 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            {{ config('app.name') }}
+            {{-- {{ config('app.name') }} --}}
+            SMK PI AMBARRUKMO 1 SLEMAN
         @endcomponent
     @endslot
 
