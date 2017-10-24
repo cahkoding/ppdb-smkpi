@@ -56,6 +56,24 @@ $().ready(function() {
         $(window).scrollTop($('#reply_div').offset().top-20);
     });
 
+    $( window ).on( "load", function() {
+      $('#jobayah').val($('#jobayah_select').val());
+      $('#jobibu').val($('#jobibu_select').val());
+    });
+    $('#jobayah_select').on('change', function() {
+      $('#jobayah').val($('#jobayah_select').val());
+    });
+    $('#jobibu_select').on('change', function() {
+      $('#jobibu').val($('#jobibu_select').val());
+    });
+    $('#aksi_select').on('change', function() {
+      $('#aksi').val($('#aksi_select').val());
+    });
+
+    $('#btn_toolsForm').click(function(){
+        $('#toolsForm').submit();
+    });
+
     $('#edit').click(function() {
 
           $('input').not('#disabled').not('input[type=hidden]').each(function() {

@@ -103,7 +103,8 @@
                       <li><a class="waves-effect waves-teal" href="/info"><i class="material-icons">info</i>Informasi</a></li>
                       <li><a class="waves-effect waves-teal" href="/laporan"><i class="material-icons">book</i>Laporan</a></li>
                       <li><a class="waves-effect waves-teal" href="/pesan_admin"><i class="material-icons">email</i>Pesan</a></li>
-                      <li class="no-padding">
+                      <li><a class="waves-effect waves-teal" href="/pengaturan"><i class="material-icons">settings</i>Pengaturan</a></li>
+                      {{-- <li class="no-padding">
                         <ul class="collapsible collapsible-accordion">
                           <li class="bold"><a class="collapsible-header waves-effect waves-teal"><i class="material-icons">settings</i>Pengaturan</a>
                             <div class="collapsible-body">
@@ -114,7 +115,7 @@
                             </div>
                           </li>
                         </ul>
-                      </li>
+                      </li> --}}
                 </ul>
             </div>
         <!-- end side nav -->

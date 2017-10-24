@@ -61,15 +61,15 @@
       </div>
 
       <div class="col s5">
-        {{-- <a href="/settings"> --}}
+        <a href="/pengaturan">
           <div class="card">
             <div class="card-content black white-text">
                 <strong><i class="material-icons left">settings</i>Settings</strong>
-                <a class="waves-effect waves-teal" href="/ppdb">PPDB</a> |
-                <a class="waves-effect waves-teal" href="/telegramBOT">Telegram BOT</a>
+                {{-- <a class="waves-effect waves-teal" href="/ppdb">PPDB</a> |
+                <a class="waves-effect waves-teal" href="/telegramBOT">Telegram BOT</a> --}}
             </div>
           </div>
-        {{-- </a> --}}
+        </a>
       </div>
   </div>
 

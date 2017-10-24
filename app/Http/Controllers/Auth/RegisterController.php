@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use View;
 use App\User;
+use App\Models\Pengaturan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -37,6 +39,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $pengaturan = Pengaturan::get()->first(); //its just a dummy data object.
+        View::share('pengaturan', $pengaturan); // Sharing is caring
     }
 
     /**
@@ -48,8 +52,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name' => 'required|max:40',
+            'email' => 'required|email|max:40|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
     }

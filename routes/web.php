@@ -1,11 +1,12 @@
 <?php
 
 Auth::routes();
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('list_peserta', 'PublicController@list_peserta');\
+Route::get('/', 'PublicController@index');
+Route::get('list_peserta', 'PublicController@list_peserta');
 Route::get('profile', 'PublicController@profile');
 Route::get('info_ppdb', 'PublicController@info_ppdb');
 Route::get('info_ppdb/{id}', 'PublicController@info_detail');
@@ -49,8 +50,9 @@ Route::group(['middleware'=>'admin'], function(){
     Route::post('visi_misi', 'SekolahController@visi_misi_store');
     Route::get('lokasi', 'SekolahController@lokasi');
     Route::post('lokasi', 'SekolahController@lokasi_store');
-    Route::get('pengaturan_ppdb', 'SekolahController@pengaturan_ppdb');
-    Route::get('pengaturan_telegrambot', 'SekolahController@pengaturan_telegramBot');
+    Route::get('pengaturan', 'SekolahController@pengaturan');
+    Route::post('pengaturan', 'SekolahController@pengaturan_update');
+    Route::post('pengaturan_telegram', 'SekolahController@pengaturan_update_telegram');
 });
 
 Route::group(['middleware'=>'auth'], function(){

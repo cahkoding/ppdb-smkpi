@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use PDF;
 use Auth;
 use MyLib;
+use View;
 use App\Models\Info;
 use App\Models\Profile;
+use App\Models\Pengaturan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
@@ -14,7 +16,12 @@ use App\Http\Requests\InformasiRequest;
 
 class InfoController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $pengaturan = Pengaturan::get()->first(); //its just a dummy data object.
+        View::share('pengaturan', $pengaturan); // Sharing is caring
+    }
+
     public function index()
     {
         $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();

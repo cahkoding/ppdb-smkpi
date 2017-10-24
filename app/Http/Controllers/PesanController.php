@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Auth;
 use MyLib;
+use View;
 use App\User;
 use Http\Requests;
 use App\Models\Pesan;
 use App\Models\Profile;
+use App\Models\Pengaturan;
 use Illuminate\Http\Request;
 use App\Events\UserMengirimPesan;
 use App\Http\Requests\SendRequest;
@@ -15,6 +17,11 @@ use App\Http\Requests\ReplyRequest;
 
 class PesanController extends Controller
 {
+    public function __construct()
+    {
+        $pengaturan = Pengaturan::get()->first(); //its just a dummy data object.
+        View::share('pengaturan', $pengaturan); // Sharing is caring
+    }
 
     public function index()
     {

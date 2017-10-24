@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\Telegram_Settings;
 use App\Events\UserMengirimPesan;
 use Illuminate\Queue\InteractsWithQueue;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -28,8 +29,10 @@ class KirimPesanTelegramKeAdmin
      */
     public function handle(UserMengirimPesan $event)
     {
+        $telegram=Telegram_Settings::get()->first();
         Telegram::sendMessage([
-            'chat_id' => '410626437',
+            // 410626437
+            'chat_id' => $telegram->chat_id,
             'text' => 'Anda memiliki pesan dari user yang harus segera dijawab!'
         ]);
     }

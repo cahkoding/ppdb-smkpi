@@ -2,13 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use View;
+use App\User;
 use App\Models\Info;
 use App\Models\Sekolah;
-use App\User;
+use App\Models\Pengaturan;
+use Illuminate\Http\Request;
+
 
 class PublicController extends Controller
 {
+  public function __construct()
+  {
+      $pengaturan = Pengaturan::get()->first(); //its just a dummy data object.
+      View::share('pengaturan', $pengaturan); // Sharing is caring
+  }
+
+  public function index()
+  {
+    return view('welcome');
+  }
+
   public function list_peserta()
   {
       $users = User::Where('role','<>',2)->paginate(7);

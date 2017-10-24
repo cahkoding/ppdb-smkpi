@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use PDF;
+use View;
 use Auth;
 use MyLib;
 use App\User;
@@ -10,6 +11,7 @@ use App\Models\Nilai;
 use App\Models\Tahun;
 use App\Models\Profile;
 use App\Models\Pekerjaan;
+use App\Models\Tahun_Ajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserRequest;
@@ -18,6 +20,12 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $tahun_ajaran = Tahun_Ajaran::all();
+        View::share('tahun_ajaran', $tahun_ajaran); // Sharing is caring
+    }
+    
     public function index()
     {
         $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
