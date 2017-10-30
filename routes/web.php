@@ -20,12 +20,16 @@ Route::group(['middleware'=>'admin'], function(){
 
     Route::get('admin', 'adminController@index');
     Route::get('peserta', 'adminController@peserta');
-    Route::post('peserta', 'adminController@apply');
-    Route::get('_peserta', 'adminController@cari_peserta');
+    Route::get('peserta/cari', 'adminController@cari_peserta');
+    Route::get('peserta/filter', 'adminController@filter');
     Route::get('cetakform/{id}', 'AdminController@cetakForm');
     Route::get('hapus/{id}', 'AdminController@hapus');
     Route::get('edit/{id}', 'AdminController@edit');
     Route::post('edit/{id}', 'AdminController@update');
+
+    Route::post('peserta/destroy', 'adminController@multi_destroy');
+    Route::post('peserta/update_verifikasi/{id}', 'adminController@multi_verifikasi');
+    Route::post('peserta/update_diterima/{id}', 'adminController@multi_diterima');
 
 
     Route::get('info', 'InfoController@index');

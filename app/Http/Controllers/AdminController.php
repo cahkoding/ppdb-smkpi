@@ -11,6 +11,7 @@ use App\Models\Nilai;
 use App\Models\Tahun;
 use App\Models\Profile;
 use App\Models\Pekerjaan;
+use App\Models\Pengaturan;
 use App\Models\Tahun_Ajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,22 +21,26 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
         $tahun_ajaran = Tahun_Ajaran::all();
-        View::share('tahun_ajaran', $tahun_ajaran); // Sharing is caring
+        $pengaturan = Pengaturan::get()->first();
+        View::share('tahun_ajaran', $tahun_ajaran);
+        View::share('pengaturan', $pengaturan);
+        View::share('hal',$request->page);
     }
-    
+
     public function index()
     {
         $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
         return view('admin.home', compact('profile'));
     }
 
-    public function peserta()
+    public function peserta(Request $request)
     {
+        // dd($request->page);
         $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
-        $users = Profile::paginate(7);
+        $users = User::Where('role',1)->paginate(7); //Profile::paginate(7);
         return view('admin.peserta', compact('users', 'profile'));
     }
 
@@ -63,21 +68,28 @@ class AdminController extends Controller
         return redirect('/admin/user')->with('message', $request->email.' Berhasil ditambahkan!');
     }
 
-    public function apply(Request $request)
-    {
-        // by KhihadySucahyo, Kalo Objek manggil onbjek gaperlu diekstrak objeknya wkwk
-        $arr = array_merge(array_map('intval', array_slice($request->id, 0)));
-        $users = Profile::whereIn('user_id', [$arr])->update(['status_diterima'=>'Lulus']);
-        return redirect()->back()->with('message','Berhasil apply!');
-    }
-
     public function cari_peserta(Request $request)
     {
-        $par=$request->search;
+        $par=$request->cari;
         $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
-        $users = Profile::Where('no_peserta','like',"%{$par}%")
-                        ->orWhere('nama','like',"%{$par}%")
-                        ->orWhere('asal_sekolah','like',"%{$par}%")
+        $users = User::join('profiles','profiles.user_id','=','users.id')
+                        ->Where('role',1)
+                        ->Where('profiles.no_peserta','like',"%{$par}%")
+                        ->orWhere('profiles.nama','like',"%{$par}%")
+                        ->orWhere('profiles.asal_sekolah','like',"%{$par}%")
+                        ->paginate(7);
+        return view('admin.peserta', compact('users', 'profile'));
+    }
+
+    public function filter(Request $request)
+    {
+        $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+        $users = User::join('profiles','profiles.user_id','=','users.id')
+                        ->Where('role',1)
+                        ->Where('tahun_ajaran'   , $p1=(isset($request->tahun_ajaran))    ?"=":"<>", ($p1=="=")?$request->tahun_ajaran   :"0")
+                        ->Where('jenis_kelamin'  , $p2=(isset($request->jenkel))          ?"=":"<>", ($p2=="=")?$request->jenkel         :"undefined")
+                        ->Where('agama'          , $p3=(isset($request->agama))           ?"=":"<>", ($p3=="=")?$request->agama          :"undefined")
+                        ->Where('status_diterima', $p4=(isset($request->status_diterima)) ?"=":"<>", ($p4=="=")?$request->status_diterima:"undefined")
                         ->paginate(7);
         return view('admin.peserta', compact('users', 'profile'));
     }
@@ -200,5 +212,30 @@ class AdminController extends Controller
         $pdf=PDF::loadView('pdf.calonsiswa_terdaftar', compact('users'));
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('calonsiswa_terdaftar.pdf');
+    }
+
+    // aksi_multiple_select
+    public function multi_destroy(Request $request)
+    {
+        $usersID = array_merge(array_map('intval', array_slice($request->id, 0)));
+        $users = User::destroy($usersID);
+        return redirect()->back()->with('message', count($request->id).' records peserta telah dihapus!');
+    }
+
+    public function multi_verifikasi(Request $request, $id)
+    {
+        $usersID    = array_merge(array_map('intval', array_slice($request->id, 0)));
+        $verifikasi = ($id==0) ? 'Terverifikasi' : '';
+        $users      = Profile::whereIn('user_id', $usersID)->update(['status_verifikasi'=>$verifikasi]);
+        return redirect()->back()->with('message', count($request->id).' records peserta telah diverifikasi!');
+    }
+
+    public function multi_diterima(Request $request, $id)
+    {
+        // by KhihadySucahyo, Kalo Objek manggil onbjek gaperlu diekstrak objeknya dan tanpa [] wkwk
+        $usersID    = array_merge(array_map('intval', array_slice($request->id, 0)));
+        $diterima   = ($id==0) ? 'Lulus' : 'Tidak Lulus';
+        $users      = Profile::whereIn('user_id', $usersID)->update(['status_diterima'=>$diterima]);
+        return redirect()->back()->with('message', count($request->id).' records peserta status:"diterima"!');
     }
 }

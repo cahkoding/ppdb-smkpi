@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use App\Http\Requests\SimpanRequest;
+use App\Http\Requests\UploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -87,18 +88,9 @@ class UserController extends Controller
     }
 
 
-    public function upload(Request $request)
+    public function upload(UploadRequest $request)
     {
-        $this->validate($request, ['foto_upload' => 'mimes:jpeg,jpg,png|max:150|required']);
-        if($request->tmp_foto!=null){
-            Storage::delete('public/foto/'.$request->tmp_foto);
-        }
-
-        $filename_ = time().'_'.$request->file('foto_upload')->getClientOriginalName();
-        $filename  = str_replace(' ', '_', $filename_);
-        $request->file('foto_upload')->storeAs('public/foto', $filename);
-
-        Profile::Where('user_id',Auth::user()->id)->update(['foto'=>$filename]);
+        Profile::Where('user_id',Auth::user()->id)->update(['foto'=>MyLib::UploadFoto($request)]);
         return redirect()->back()->with('message','Berhasil Upload Foto!');
     }
 

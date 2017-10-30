@@ -134,7 +134,8 @@
                   <input type="hidden" name="tmp_foto" value="{{$profile->foto}}">
               </div>
               <div class="modal-footer">
-                <button type="submit" class="modal-action waves-effect waves-green btn-flat" name="upload">
+                <button type="submit" class="modal-action waves-effect waves-green btn-flat" name="upload"
+                        onclick="if (eval(ukuran)>1.5) { alert('Ukuran Melebihi Batas yaitu 1.5MB'); return false; } else { return true; }">
                   <i class="material-icons left">file_upload</i>Upload</a>
                 </button>
                 <button onclick="batalUpload('{{$avatar}}')" type="reset" class="modal-action modal-close waves-effect waves-green btn-flat" name="reset">

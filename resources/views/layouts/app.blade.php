@@ -123,14 +123,14 @@
                <br>All Right Reserved
              </div>
              <div class="col s12 m12 l2">
-               <strong>Menu</strong>
+               {{-- <strong>Menu</strong>
                <ul class="putih-text">
                  <li ><a href="#">PHP</a></li>
                  <li><a href="#">JAVA</a></li>
                  <li><a href="#">MySQL</a></li>
-               </ul>
+               </ul> --}}
              </div>
-             <div class="col s12 m12 l2"><strong>Links</strong></div>
+             {{-- <div class="col s12 m12 l2"><strong>Links</strong></div> --}}
              <div class="col s12 m12 l4">
               <strong>SMK PI AMBARRUKMO 1 SLEMAN</strong>
               <br>

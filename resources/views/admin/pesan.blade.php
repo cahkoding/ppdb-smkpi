@@ -22,7 +22,7 @@
              <tr>
                  <th>Dari</th>
                  <th>Subject</th>
-                 <th>Tanggal Terkirim</th>
+                 <th>Tanggal Masuk</th>
                  <th>Tools</th>
              </tr>
            </thead>
@@ -82,9 +82,7 @@
             <div class="card-title left-align indigo-text"><strong>Tulis pesan</strong></div>
             <div class="card-action ">
 
-              <form class="form-horizontal" role="form" method="post" action="/pesan_admin" enctype="multipart/form-data">
-                  {{ csrf_field() }}
-
+              <form class="form-horizontal" role="form" method="post" action="/pesan_admin" enctype="multipart/form-data">{{ csrf_field() }}
                   <div class="input-field col s12 m6">
                     <select class="icons" name="userid">
                       <option value="" disabled selected>Pilih user tujuan</option>
@@ -95,21 +93,18 @@
                     </select>
                     <label>Kepada</label>
                   </div>
-
                   <div class="row">
                     <div class="input-field col s12">
                       <input required  id="subject" type="text" class="validate" name="subject">
                       <label for="subject">Subject</label>
                     </div>
                   </div>
-
                   <div class="row">
                       <div class="input-field col s12">
                           <textarea  id="pesan" class="materialize-textarea" name="pesan"></textarea>
                           <label for="pesan">pesan teks</label>
                       </div>
                   </div>
-
                   <div class="row">
                     <div class="file-field input-field col s7">
                       <div class="btn">
@@ -121,7 +116,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="row">
                       <div class="input-field offset-s12">
                         <button  type="submit" class="btn btn-primary right indigo">
@@ -130,6 +124,7 @@
                       </div>
                   </div>
               </form>
+              
             </div>
           </div>
         </div>

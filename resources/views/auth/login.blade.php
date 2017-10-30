@@ -8,6 +8,14 @@
         <div class="card-content">
           <div class="card-title">Login Area</div>
           <div class="card-action ">
+            @if ($errors->any())
+              <div class="col s12 z-depth-1 #ffebee red lighten-5 red-text" style="border-radius:5px; padding:5px;">
+              @foreach ($errors->all() as $err)
+                  <li>{{$err}}</li>
+              @endforeach
+            </div><br><br>
+            @endif
+
             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
 
@@ -15,11 +23,11 @@
                 <i class="material-icons prefix">account_circle</i>
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                 <label for="icon_prefix" data-success="benar" data-error="salah!">Email</label>
-                @if ($errors->has('email'))
+                {{-- @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
-                @endif
+                @endif --}}
               </div>
               <div class="input-field">
                 <i class="material-icons prefix">vpn_key</i>

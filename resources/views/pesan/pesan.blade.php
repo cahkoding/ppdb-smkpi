@@ -16,7 +16,7 @@
              <tr>
                  <th>Dari</th>
                  <th>Subject</th>
-                 <th>Tanggal Terkirim</th>
+                 <th>Tanggal Masuk</th>
                  <th>Tools</th>
              </tr>
            </thead>

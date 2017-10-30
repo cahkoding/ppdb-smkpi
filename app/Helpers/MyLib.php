@@ -59,6 +59,17 @@ class MyLib
         return $gambar;
     }
 
+    public static function UploadFoto($request)
+    {
+        if($request->tmp_foto!=null){
+            Storage::delete('public/foto/'.$request->tmp_foto);
+        }
+        $foto_= time().'_'.$request->file('foto_upload')->getClientOriginalName();
+        $foto= str_replace(' ', '_', $foto_);
+        $request->file('foto_upload')->storeAs('public/foto', $foto);
+        return $foto;
+    }
+
     public static function getIDSelect($request)
     {
         $id=$request->id;
@@ -70,5 +81,6 @@ class MyLib
           $i++;
         }
     }
+
 
 }

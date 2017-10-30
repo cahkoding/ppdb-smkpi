@@ -50,6 +50,11 @@ ukuran = this.files[0].size/1500/1500;
    //alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
 });
 
+$('#input1').bind('change', function() {
+ukuran = this.files[0].size/1500/1500;
+   //alert('This file size is: ' + this.files[0].size/1024/1024 + "MB");
+});
+
 $().ready(function() {
     $('#reply').click(function(){
         $('#reply_div').toggle();
@@ -66,13 +71,17 @@ $().ready(function() {
     $('#jobibu_select').on('change', function() {
       $('#jobibu').val($('#jobibu_select').val());
     });
-    $('#aksi_select').on('change', function() {
-      $('#aksi').val($('#aksi_select').val());
-    });
 
-    $('#btn_toolsForm').click(function(){
-        $('#toolsForm').submit();
+
+    // multi aksi
+    $('#multi_aksi_select').on('change', function() {
+      $('#multi_aksi_form').attr("action", $('#multi_aksi_select').val());
+      $('#btn_multi_select').removeAttr('disabled');
     });
+    $('#btn_multi_select').click(function(){
+        $('#multi_aksi_form').submit();
+    });
+    // end multi
 
     $('#edit').click(function() {
 
