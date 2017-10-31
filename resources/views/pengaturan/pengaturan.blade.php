@@ -16,7 +16,7 @@
 
                   <div class="row">
                     <div class="input-field col m3 s12 ">
-                      <select name="tahun_ajaran" required id="jobayah_select">
+                      <select name="tahun_ajaran" required >
                         <option  disabled selected>Pilih salah satu</option>
                         @foreach ($tahun_ajaran as $th)
                           <option {{ ($th->id==$pengaturan->tahun_ajaran) ? 'selected' : '' }} value="{{$th->id}}">{{$th->tahun_ajaran}}</option>

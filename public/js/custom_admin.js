@@ -83,6 +83,18 @@ $().ready(function() {
     });
     // end multi
 
+    //laporan action
+    $('#select_laporan').on('change', function() {
+      $('#form_laporan').attr("action", $('#select_laporan').val());
+      // BUAT HIDDEN TA
+      var val = $(this).val();
+      if((val == "../laporan/data_pendaftar")||(val=="../laporan/data_kelulusan")){
+         $("#div_ta").show();
+      }else {
+         $("#div_ta").hide();
+      }
+    });
+
     $('#edit').click(function() {
 
           $('input').not('#disabled').not('input[type=hidden]').each(function() {

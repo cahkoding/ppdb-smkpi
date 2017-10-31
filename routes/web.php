@@ -31,6 +31,12 @@ Route::group(['middleware'=>'admin'], function(){
     Route::post('peserta/update_verifikasi/{id}', 'adminController@multi_verifikasi');
     Route::post('peserta/update_diterima/{id}', 'adminController@multi_diterima');
 
+    // laporan
+    Route::post('laporan/data_pendaftar', 'LaporanController@lap_data_pendaftar');
+    Route::get('laporan/pendaftar_pertahun', 'LaporanController@lap_pendaftar_pertahun');
+    Route::post('laporan/statistik', 'LaporanController@lap_statistik');
+    Route::post('laporan/data_kelulusan', 'LaporanController@lap_data_kelulusan');
+
 
     Route::get('info', 'InfoController@index');
     Route::post('info', 'InfoController@store');
