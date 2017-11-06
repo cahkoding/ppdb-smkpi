@@ -130,7 +130,7 @@
                 <img id="preview" class="center-align" width="200px" class="circle" src="{{$avatar}}">
                 <form class="form-horizontal" role="form" method="post" action="/upload" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                  <input required id="input1" type="file" name="foto_upload" class="input" accept="image/*"  onchange="tampilkanPreview(this,'preview')" />
+                  <input required id="lampiran-file" type="file" name="foto_upload" class="input" accept="image/*"  onchange="tampilkanPreview(this,'preview')" />
                   <input type="hidden" name="tmp_foto" value="{{$profile->foto}}">
               </div>
               <div class="modal-footer">

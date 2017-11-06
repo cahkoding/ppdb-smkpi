@@ -19,7 +19,11 @@ class UserMengirimPesan
      *
      * @return void
      */
-    public function __construct(){}
+    public $request, $id_pesan;
+    public function __construct($request, $id_pesan){
+        $this->request =$request;
+        $this->id_pesan=$id_pesan;
+    }
 
     /**
      * Get the channels the event should broadcast on.

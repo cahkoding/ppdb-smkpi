@@ -16,6 +16,7 @@ use App\Models\Tahun_Ajaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UploadRequest;
 use App\Http\Requests\SimpanRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,6 +65,7 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => $request->role,
+            'role' => 2,
         ]);
         return redirect('/admin/user')->with('message', $request->email.' Berhasil ditambahkan!');
     }
@@ -114,46 +116,54 @@ class AdminController extends Controller
 
     public function edit($id)
     {
-        $profile = Profile::Where('user_id',$id)->get()->first();
+        $profile = Profile::Where('user_id',Auth::user()->id)->get()->first();
+        $profile_user = Profile::Where('user_id',$id)->get()->first();
         $nilai   = Nilai::Where('user_id',$id)->get()->first();
         $tahun   = Tahun::all();
         $pekerjaan = Pekerjaan::all();
-        return view('admin.edit', compact('profile','tahun','pekerjaan','nilai'));
+        return view('admin.edit', compact('profile','tahun','pekerjaan','nilai', 'profile_user'));
     }
 
     public function update(SimpanRequest $request, $id)
     {
         Profile::Where('user_id',$id)->update([
-          'nama' => $request->nama,
-          'tempat_lahir' => $request->tempat_lahir,
-          'tanggal_lahir'=> $request->tanggal_lahir,
-          'jenis_kelamin' => $request->jenkel,
-          'gol_darah' => $request->gol_darah,
-          'berat_badan' => $request->berat,
-          'tinggi_badan'=> $request->tinggi,
-          'alamat'=> $request->alamat,
-          'agama' => $request->agama,
-          'asal_sekolah' => $request->asal_sekolah,
-          'alamat_sekolah' => $request->alamat_sekolah,
-          'tahun_id'=> $request->tahun,
-          'no_hp'=>$request->no_hp,
-          // Data ortu
-          'nama_ayah' => $request->nama_ayah,
-          'nama_ibu' => $request->nama_ibu,
-          'no_ortu'=>$request->no_ortu,
-          'pekerjaan_ayah' => $request->pekerjaan_ayah,
-          'pekerjaan_ibu' => $request->pekerjaan_ibu,
-          'alamat_ortu'=> $request->alamat_ortu,
-          // 'lampiran'=> MyLib::UpdateLampiran($request),
+            'nama' => $request->nama,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir'=> $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenkel,
+            'gol_darah' => $request->gol_darah,
+            'berat_badan' => $request->berat,
+            'tinggi_badan'=> $request->tinggi,
+            'alamat'=> $request->alamat,
+            'agama' => $request->agama,
+            'asal_sekolah' => $request->asal_sekolah,
+            'alamat_sekolah' => $request->alamat_sekolah,
+            'tahun_id'=> $request->tahun,
+            'no_hp'=>$request->no_hp,
+            // Data ortu
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'no_ortu'=>$request->no_ortu,
+            'pekerjaan_ayah' => $request->pekerjaan_ayah,
+            'pekerjaan_ibu' => $request->pekerjaan_ibu,
+            'alamat_ortu'=> $request->alamat_ortu,
+            'status_biodata'=>'Lengkap',
+            // 'lampiran'=> MyLib::UpdateLampiran($request),
         ]);
 
         Nilai::Where('user_id',$id)->update([
-          'ipa' => $request->n_ipa,
-          'matematika' => $request->n_math,
-          'bahasa_indonesia' => $request->n_bindo,
-          'bahasa_inggris'=> $request->n_bing,
+            'ipa' => $request->n_ipa,
+            'matematika' => $request->n_math,
+            'bahasa_indonesia' => $request->n_bindo,
+            'bahasa_inggris'=> $request->n_bing,
         ]);
         return redirect('edit/'.$id)->with('message','Data Berhasil disimpan!');
+    }
+
+    public function upload(UploadRequest $request, $id)
+    {
+        Profile::Where('user_id',$id)->update(['foto'=>MyLib::UploadFoto($request)]);
+        return redirect()->back()->with('message','Berhasil Upload Foto!');
     }
 
 

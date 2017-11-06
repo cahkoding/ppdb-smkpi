@@ -36,7 +36,7 @@ class LaporanController extends Controller
 
       // data jenkel periode sekarang
       $chart = Charts::create('pie', 'highcharts')
-        ->title('Diagram')
+        ->title('Diagram Pie Pendaftar Tahun ini')
         ->labels(['laki-laki', 'Perempuan'])
         ->values([count($laki),count($perempuan)])
         ->dimensions(500,500)
@@ -44,7 +44,7 @@ class LaporanController extends Controller
 
       // grafik pendaftar pertahun
       $dt_pertahun = Charts::create('bar', 'highcharts')
-        ->title('Diagram')
+        ->title('Diagram Batang Pendaftar Pertahun')
         ->labels($ta->pluck('tahun_ajaran'))
         ->values($per_ta->pluck('jml_pendaftar'))
         ->dimensions(500,500)

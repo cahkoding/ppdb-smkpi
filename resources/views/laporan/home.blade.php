@@ -37,7 +37,7 @@
 
 
                   <div class="input-field m3 s10">
-                    <button  type="submit" class="btn btn-primary right indigo">
+                    <button id="btnSub" disabled type="submit" class="btn btn-primary right indigo">
                       <i class="material-icons left">print</i>cetak
                     </button>
                   </div>

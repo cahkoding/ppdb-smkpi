@@ -81,6 +81,9 @@
               <form class="form-horizontal" role="form" method="post" action="/pesan" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
+                  <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                  <input type="hidden" name="nama" value="{{Auth::user()->profile->nama}}">
+
                   <div class="row">
                     <div class="input-field col s12">
                       <input id="subject" type="text" class="validate" name="subject" value="{{old('subject')}}">

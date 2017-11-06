@@ -48,7 +48,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              {{-- <div class="row">
                 <div class="input-field col s12">
                   <p style="color:#787878;">Role</p>
                   @if($errors->has('role')) <li><span class="{{$notifErr}}">{{$errors->first('role')}}</span></li> @endif
@@ -62,7 +62,7 @@
                   </p>
                   <br>
                 </div>
-              </div>
+              </div> --}}
 
 
               <div class="row">

@@ -47,7 +47,9 @@ class PesanController extends Controller
             'pesan_teks' => $request->pesan,
             'lampiran' => MyLib::UploadLampiran($request),
             'pengirim' => 'peserta',
-        ]);  event(new UserMengirimPesan());
+        ]);
+        $id_pesan=Pesan::where('id_peserta', Auth::user()->id)->whereRaw('id_pesan = (select max(`id_pesan`) from pesans)')->get()->first();
+        event(new UserMengirimPesan($request,$id_pesan));
         return redirect('/pesan#tulis-pesan')->with('message', 'Pesan berhasil dikirim!');
     }
 
@@ -61,7 +63,8 @@ class PesanController extends Controller
             'lampiran' => MyLib::UploadLampiran($request),
             'pengirim' => 'peserta',
             'jenis_pesan' => 'reply',
-        ]);  event(new UserMengirimPesan());
+        ]);
+        event(new UserMengirimPesan());
         return redirect('/pesan')->with('message', 'berhasil membalas pesan!');
     }
 

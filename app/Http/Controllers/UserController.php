@@ -30,7 +30,6 @@ class UserController extends Controller
 
     public function biodata()
     {
-
         $nilai   = Nilai::Where('user_id',MyLib::getUser())->get()->first();
         $tahun   = Tahun::all();
         $pekerjaan = Pekerjaan::all();

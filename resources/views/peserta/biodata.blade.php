@@ -7,21 +7,33 @@
     tes
   </div>
 </div> --}}
+@php
+  $warna_tip    =($profile->status_biodata!='Lengkap'||$profile->foto=='') ? 'red-text' : 'teal-text' ;
+@endphp
+@if ($profile->status_biodata=='Lengkap'&&$profile->foto=='')
+  @php $percentage="80"; $tip_header="Biodata Hampir Lengkap! Silahkan upload foto!"; @endphp
+@elseif ($profile->foto<>''&&$profile->status_biodata=='')
+  @php $percentage="20"; $tip_header="Biodata Belum Lengkap! lengkapi biodata dahulu!";@endphp
+@elseif ($profile->status_biodata=='Lengkap'&&$profile->foto<>'')
+  @php $percentage="100"; $tip_header="Biodata sudah lengkap! Segera kirim/menyerahkan berkas untuk diverfikasi!";@endphp
+@else
+  @php $percentage="0"; $tip_header="Biodata Belum Lengkap! lengkapi biodata dahulu!";@endphp
+@endif
 
 <div class="row">
   <div class="col offset-s1 s10 left-align teal-text right-align">
-      {{-- <b><i class="material-icons right">check_circle</i>TERVERIVIKSI</b> --}}
-      <b><i class="material-icons right">update</i>Menunggu Verifikasi</b>
+      @php $icon_=($profile->status_verifikasi<>'Terverifikasi') ? 'update' : 'check_circle' @endphp
+      <b><i class="material-icons right">{{$icon_}}</i>{{$profile->status_verifikasi}}</b>
   </div>
-  <div class="col offset-s1 s7 left-align red-text">
-      <span>Biodata sudah lengkap! Segera kirim/mnyerahkan berkas untuk diverfikasi!</span>
+  <div class="col offset-s1 s7 left-align {{$warna_tip}}">
+      <span>{{$tip_header}}</span>
   </div>
   <div class="col s3 right-align" style="color:#26a69a;">
-      <span>Kelengkapan Biodata: 100%</span>
+      <span>Kelengkapan Biodata: {{$percentage}}%</span>
   </div>
   <div class="col offset-s1 s10">
     <div class="progress">
-      <div class="determinate" style="width: 100%"></div>
+      <div class="determinate" style="width: {{$percentage}}%"></div>
     </div>
   </div>
 
@@ -52,8 +64,12 @@
         @php $notifErr='z-depth-1 #ffebee red lighten-5 red-text'; @endphp
         <div class="card-action ">
           {{-- <a id="edit" class="waves-effect waves-light indigo btn right"><i class="material-icons left">mode_edit</i>Edit</a> --}}
-          <a  href="cetakform" class="tooltipped waves-effect waves-light indigo btn right"
-            data-tooltip="lengkapi biodata dahulu!" data-position="right">
+          @php
+            $action_=($profile->status_biodata!='Lengkap'||$profile->foto=='') ? '#' : 'cetakform' ;
+            $tip_   =($profile->status_biodata!='Lengkap') ? 'lengkapi biodata dahulu!' : 'Cetak Form' ;
+          @endphp
+          <a  href="{{$action_}}" class="tooltipped waves-effect waves-light indigo btn right"
+            data-tooltip="{{$tip_}}" data-position="right">
             <i class="material-icons left">print</i>Cetak Form
             {{-- <i class="material-icons left">print</i><strike>Cetak Form</strike> --}}
           </a>
@@ -79,7 +95,7 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="nopeserta" type="text"  name="nopeserta" value="{{$profile->no_peserta}}">
+                  <input disabled  id="nopeserta" type="text"  name="nopeserta" value="{{$profile->no_peserta}}">
                   <label for="nopeserta">Nomor Peserta</label>
                 </div>
               </div>
@@ -93,11 +109,11 @@
 
               <div class="row">
                 <div class="input-field col s6">
-                  <input required  id="tempatlahir" type="text"  name="tempat_lahir" value="@if($errors->has('tempat_lahir')) {{old('tempat_lahir')}} @else {{$profile->tempat_lahir}} @endif">
+                  <input   id="tempatlahir" type="text"  name="tempat_lahir" value="@if($errors->has('tempat_lahir')) {{old('tempat_lahir')}} @else {{$profile->tempat_lahir}} @endif">
                   <label for="tempatlahir">Tempat lahir @if($errors->has('tempat_lahir')) <li><span class="{{$notifErr}}">{{$errors->first('tempat_lahir')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s6">
-                  <input required id="tanggallahir" type="text" class="datepicker" name="tanggal_lahir" value="@if($errors->has('tanggal_lahir')) {{old('tanggal_lahir')}} @else {{$profile->tanggal_lahir}} @endif">
+                  <input  id="tanggallahir" type="text" class="datepicker" name="tanggal_lahir" value="@if($errors->has('tanggal_lahir')) {{old('tanggal_lahir')}} @else {{$profile->tanggal_lahir}} @endif">
                   <label for="tanggallahir">Tanggal lahir @if($errors->has('tanggal_lahir')) <li><span class="{{$notifErr}}">{{$errors->first('tanggal_lahir')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -121,15 +137,15 @@
 
               <div class="row">
                 <div class="input-field col s4">
-                  <input required  id="goldarah" type="text"  name="gol_darah" value="@if($errors->has('gol_darah')) {{old('gol_darah')}} @else {{$profile->gol_darah}} @endif">
+                  <input   id="goldarah" type="text"  name="gol_darah" value="@if($errors->has('gol_darah')) {{old('gol_darah')}} @else {{$profile->gol_darah}} @endif">
                   <label for="goldarah">Golongan Darah @if($errors->has('gol_darah')) <li><span class="{{$notifErr}}">{{$errors->first('gol_darah')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s4">
-                  <input required  id="berat" type="text"  name="berat" value="@if($errors->has('berat')) {{old('berat')}} @else {{$profile->berat_badan}} @endif">
+                  <input   id="berat" type="text"  name="berat" value="@if($errors->has('berat')) {{old('berat')}} @else {{$profile->berat_badan}} @endif">
                   <label for="berat">Berat Badan (Kg) @if($errors->has('berat')) <li><span class="{{$notifErr}}">{{$errors->first('berat')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s4">
-                  <input required  id="tinggi" type="text"  name="tinggi" value="@if($errors->has('tinggi')) {{old('tinggi')}} @else {{$profile->tinggi_badan}} @endif">
+                  <input   id="tinggi" type="text"  name="tinggi" value="@if($errors->has('tinggi')) {{old('tinggi')}} @else {{$profile->tinggi_badan}} @endif">
                   <label for="tinggi">Tinggi Badan (Cm) @if($errors->has('tinggi')) <li><span class="{{$notifErr}}">{{$errors->first('tinggi')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -143,7 +159,7 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <select required  name="agama">
+                  <select   name="agama">
                     <option value="" disabled selected>Pilih salah satu</option>
                       <option {{ ($profile->agama=='islam') ? 'selected' : '' }} value="islam">Islam</option>
                       <option {{ ($profile->agama=='kristen') ? 'selected' : '' }} value="kristen">Kristen</option>
@@ -156,7 +172,7 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="asal" type="text"  name="asal_sekolah" value="@if($errors->has('asal_sekolah')) {{old('asal_sekolah')}} @else {{$profile->asal_sekolah}} @endif">
+                  <input   id="asal" type="text"  name="asal_sekolah" value="@if($errors->has('asal_sekolah')) {{old('asal_sekolah')}} @else {{$profile->asal_sekolah}} @endif">
                   <label for="asal">Asal Sekolah @if($errors->has('agama')) <li><span class="{{$notifErr}}">{{$errors->first('agama')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -170,7 +186,7 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <select required id="mySelect"  name="tahun">
+                  <select  id="mySelect"  name="tahun">
                     <option value="" disabled selected>Pilih salah satu</option>
                     @foreach ($tahun as $tahuns)
                       <option {{ ($profile->tahun_id==$tahuns->id) ? 'selected' : '_' }} value="{{$tahuns->id}}">{{$tahuns->tahun}}</option>
@@ -182,26 +198,26 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="noHp" type="text"  name="no_hp" value="@if($errors->has('no_hp')) {{old('no_hp')}} @else {{$profile->no_hp}} @endif">
+                  <input   id="noHp" type="text"  name="no_hp" value="@if($errors->has('no_hp')) {{old('no_hp')}} @else {{$profile->no_hp}} @endif">
                   <label for="noHp">No Telp/Hp @if($errors->has('no_hp')) <li><span class="{{$notifErr}}">{{$errors->first('no_hp')}}</span></li> @endif</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s3">
-                  <input required   id="n_ipa" type="text"  name="n_ipa" value="@if($errors->has('n_ipa')) {{old('n_ipa')}} @else {{$nilai->ipa}} @endif">
+                  <input    id="n_ipa" type="text"  name="n_ipa" value="@if($errors->has('n_ipa')) {{old('n_ipa')}} @else {{$nilai->ipa}} @endif">
                   <label for="n_ipa">UN IPA @if($errors->has('n_ipa')) <li><span class="{{$notifErr}}">{{$errors->first('n_ipa')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s3">
-                  <input  required  id="n_ipa" type="text"  name="n_math" value="@if($errors->has('n_math')) {{old('n_math')}} @else {{$nilai->matematika}} @endif">
+                  <input    id="n_ipa" type="text"  name="n_math" value="@if($errors->has('n_math')) {{old('n_math')}} @else {{$nilai->matematika}} @endif">
                   <label for="n_math">UN MATEMATIKA @if($errors->has('n_math')) <li><span class="{{$notifErr}}">{{$errors->first('n_math')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s3">
-                  <input required  id="n_bindo" type="text"  name="n_bindo" value="@if($errors->has('n_bindo')) {{old('n_bindo')}} @else {{$nilai->bahasa_indonesia}} @endif">
+                  <input   id="n_bindo" type="text"  name="n_bindo" value="@if($errors->has('n_bindo')) {{old('n_bindo')}} @else {{$nilai->bahasa_indonesia}} @endif">
                   <label for="n_bindo">UN BAHASA INDONESIA @if($errors->has('n_bindo')) <li><span class="{{$notifErr}}">{{$errors->first('n_bindo')}}</span></li> @endif</label>
                 </div>
                 <div class="input-field col s3">
-                  <input required  id="n_bing" type="text"  name="n_bing" value="@if($errors->has('n_bing')) {{old('n_bing')}} @else {{$nilai->bahasa_inggris}} @endif">
+                  <input   id="n_bing" type="text"  name="n_bing" value="@if($errors->has('n_bing')) {{old('n_bing')}} @else {{$nilai->bahasa_inggris}} @endif">
                   <label for="n_bing">UN BAHASA INGGRIS @if($errors->has('n_bing')) <li><span class="{{$notifErr}}">{{$errors->first('n_bing')}}</span></li> @endif</label>
                 </div>
               </div>
@@ -250,26 +266,26 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="namaAyah" type="text"  name="nama_ayah" value="@if($errors->has('nama_ayah')) {{old('nama_ayah')}} @else {{$profile->nama_ayah}} @endif">
+                  <input   id="namaAyah" type="text"  name="nama_ayah" value="@if($errors->has('nama_ayah')) {{old('nama_ayah')}} @else {{$profile->nama_ayah}} @endif">
                   <label for="namaAyah">Nama Ayah @if($errors->has('nama_ayah')) <li><span class="{{$notifErr}}">{{$errors->first('nama_ayah')}}</span></li> @endif</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="namaIbu" type="text"  name="nama_ibu" value="@if($errors->has('nama_ibu')) {{old('nama_ibu')}} @else {{$profile->nama_ibu}} @endif">
+                  <input   id="namaIbu" type="text"  name="nama_ibu" value="@if($errors->has('nama_ibu')) {{old('nama_ibu')}} @else {{$profile->nama_ibu}} @endif">
                   <label for="namaIbu">Nama Ibu @if($errors->has('nama_ibu')) <li><span class="{{$notifErr}}">{{$errors->first('nama_ibu')}}</span></li> @endif</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input required  id="noOrtu" type="text"  name="no_ortu" value="@if($errors->has('no_ortu')) {{old('no_ortu')}} @else {{$profile->no_ortu}} @endif">
+                  <input   id="noOrtu" type="text"  name="no_ortu" value="@if($errors->has('no_ortu')) {{old('no_ortu')}} @else {{$profile->no_ortu}} @endif">
                   <label for="noOrtu">No Telp/Hp @if($errors->has('no_ortu')) <li><span class="{{$notifErr}}">{{$errors->first('no_ortu')}}</span></li> @endif</label>
                 </div>
               </div>
 
               <div class="row">
                 <div class="input-field col s12">
-                  <select required id="jobayah_select">
+                  <select  id="jobayah_select">
                     <option value="" disabled selected>Pilih salah satu</option>
                     @foreach ($pekerjaan as $pekerjaans)
                       <option {{ ($profile->pekerjaan_ayah==$pekerjaans->id) ? 'selected' : '_' }}  value="{{$pekerjaans->id}}">{{$pekerjaans->nama_pekerjaan}}</option>
@@ -282,7 +298,7 @@
 
               <div class="row">
                 <div class="input-field col s12">
-                  <select required  id="jobibu_select">
+                  <select  id="jobibu_select">
                     <option value="" disabled selected>Pilih salah satu</option>
                     @foreach ($pekerjaan as $pekerjaans)
                       <option {{ ($profile->pekerjaan_ibu==$pekerjaans->id) ? 'selected' : '_' }}  value="{{$pekerjaans->id}}">{{$pekerjaans->nama_pekerjaan}}</option>

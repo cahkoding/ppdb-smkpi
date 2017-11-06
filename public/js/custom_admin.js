@@ -56,6 +56,17 @@ ukuran = this.files[0].size/1500/1500;
 });
 
 $().ready(function() {
+  $('.datepicker').pickadate({
+selectMonths: true, // Creates a dropdown to control month
+selectYears: 15, // Creates a dropdown of 15 years to control year,
+min: new Date(1990,3,20),
+max: new Date(2010,7,14),
+today: 'Today',
+clear: 'Clear',
+close: 'Ok',
+format: 'yyyy-mm-dd',
+closeOnSelect: false // Close upon selecting a date,
+});
     $('#reply').click(function(){
         $('#reply_div').toggle();
         $(window).scrollTop($('#reply_div').offset().top-20);
@@ -85,6 +96,7 @@ $().ready(function() {
 
     //laporan action
     $('#select_laporan').on('change', function() {
+      $('#btnSub').removeAttr('disabled');
       $('#form_laporan').attr("action", $('#select_laporan').val());
       // BUAT HIDDEN TA
       var val = $(this).val();
